@@ -2,11 +2,12 @@
 // Handles communication with the Google Apps Script backend backed by Google Sheets.
 
 const SCRIPT_URL_KEY = 'moshaga_script_url';
+const DEFAULT_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbylfJKbOWOJaEdn0VJxqJRjzm3dgsQnPj72uoFwEuEhsbA0sjxGGSG5DC78n5py2_mv_Q/exec';
 
 export const getScriptUrl = () => {
   const envUrl =
     (typeof import.meta !== 'undefined' && import.meta.env?.VITE_SCRIPT_URL) || '';
-  let url = (envUrl || localStorage.getItem(SCRIPT_URL_KEY) || '').trim();
+  let url = (envUrl || localStorage.getItem(SCRIPT_URL_KEY) || DEFAULT_SCRIPT_URL).trim();
   if (url.endsWith('/execc')) {
     url = url.slice(0, -1);
   }
