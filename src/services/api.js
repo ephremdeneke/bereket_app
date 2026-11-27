@@ -215,6 +215,15 @@ export const api = {
   login: (username, password) => fetchAPI('login', { username, password }),
   getUsers: () => fetchAPI('getUsers'),
   addUser: (data) => fetchAPI('addUser', { data }),
+  changePassword: (data) => fetchAPI('changePassword', { data }),
+  changeUser: (data) => fetchAPI('changeUser', { data }),
+  updateUser: (data) => fetchAPI('updateUser', { data }),
+  changeCredentials: (data) => fetchAPI('changeCredentials', { data }),
+  updateUserCredentials: (data) => fetchAPI('updateUserCredentials', { data }),
+
+  getDataSummary: () => fetchAPI('getDataSummary'),
+  clearSheetData: (data) => fetchAPI('clearSheetData', { data }),
+  clearAllData: (data) => fetchAPI('clearAllData', { data }),
 
   getProducts: async () => (await fetchAPI('getProducts')).map(mapProduct),
   addProduct: (data) => fetchAPI('addProduct', { data: toBackendProduct(data) }),

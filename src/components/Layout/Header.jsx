@@ -1,9 +1,9 @@
 import React from 'react';
-import { Menu, Sheet, Plus, Calendar, CheckCircle2, AlertCircle, LogOut } from 'lucide-react';
+import { Menu, Plus, Calendar, LogOut, Settings } from 'lucide-react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { formatDate } from '../../utils/formatters';
 
-export const Header = ({ onOpenSidebar, isGoogleSheetsConnected, onOpenSettings, currentUser, onLogout }) => {
+export const Header = ({ onOpenSidebar, isGoogleSheetsConnected, onOpenSettings, onOpenChangeCredentials, currentUser, onLogout }) => {
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -17,6 +17,7 @@ export const Header = ({ onOpenSidebar, isGoogleSheetsConnected, onOpenSettings,
       case '/expenses': return 'Expense Management';
       case '/reports': return 'Business Analysis & Reports';
       case '/sheets-setup': return 'Google Sheets API Setup';
+      case '/data-management': return 'Data Management';
       default: return 'moshaga Cafe Manager';
     }
   };
@@ -48,33 +49,25 @@ export const Header = ({ onOpenSidebar, isGoogleSheetsConnected, onOpenSettings,
 
         {/* Right side: Google Sheets indicator + Record Daily Sales shortcut button */}
         <div className="flex items-center gap-2 sm:gap-3">
-          {/* Connection status badge */}
+          {/* Settings shortcut (connection status sign hidden) */}
           <button
             onClick={onOpenSettings}
-            className={`flex items-center gap-2 px-3 py-1.5 rounded-xl border text-xs font-semibold transition-all shadow-2xs ${
-              isGoogleSheetsConnected
-                ? 'bg-emerald-50 text-emerald-800 border-emerald-300 hover:bg-emerald-100'
-                : 'bg-amber-50 text-amber-900 border-amber-300 hover:bg-amber-100'
-            }`}
-            title="Click to manage Google Sheets API connection"
+            className="p-2 rounded-xl text-slate-600 hover:bg-slate-100 transition-colors"
+            title="Manage Google Sheets API connection"
           >
-            <Sheet className="w-4 h-4" />
-            <span className="hidden md:inline">
-              {isGoogleSheetsConnected ? 'Google Sheet Connected' : 'Backend Not Connected'}
-            </span>
-            {isGoogleSheetsConnected ? (
-              <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600" />
-            ) : (
-              <AlertCircle className="w-3.5 h-3.5 text-amber-600" />
-            )}
+            <Settings className="w-5 h-5" />
           </button>
-
-          {/* Current user + logout */}
-          <div className="hidden sm:flex items-center gap-2 px-3 py-1.5 rounded-xl bg-slate-100 text-slate-700 text-xs font-semibold">
+          {/* Current user + change credentials */}
+          <button
+            type="button"
+            onClick={onOpenChangeCredentials}
+            className="hidden sm:flex items-center gap-2 px-3 py-1.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-semibold transition-colors"
+            title="Change password / username"
+          >
             <span className="max-w-24 truncate">{currentUser?.username || 'User'}</span>
             {currentUser?.role && <span className="text-slate-400">•</span>}
             {currentUser?.role && <span>{currentUser.role}</span>}
-          </div>
+          </button>
 
           <button
             type="button"

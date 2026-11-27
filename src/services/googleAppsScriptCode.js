@@ -81,7 +81,7 @@ function setupDatabaseSheets() {
   var userSheet = ss.getSheetByName('Users');
   if (userSheet && userSheet.getLastRow() <= 1) {
     var now = new Date().toISOString();
-    userSheet.appendRow(['USER-001', 'admin', sha256Hex('admin123'), 'Admin', 'Active', now, now]);
+    userSheet.appendRow(['USER-001', 'bereket', sha256Hex('beki@moshaga@123'), 'Admin', 'Active', now, now]);
   }
 
   return "Database structure successfully setup!";
@@ -225,6 +225,30 @@ function handleRequest(e) {
 
       case 'addUser':
         output.data = addUserRecord((postData && postData.data) ? postData.data : {});
+        output.success = true;
+        break;
+
+      case 'changePassword':
+      case 'changeUser':
+      case 'updateUser':
+      case 'changeCredentials':
+      case 'updateUserCredentials':
+        output.data = changeUserCredentials((postData && postData.data) ? postData.data : {});
+        output.success = true;
+        break;
+
+      case 'getDataSummary':
+        output.data = getDataSummary();
+        output.success = true;
+        break;
+
+      case 'clearSheetData':
+        output.data = clearSheetData((postData && postData.data) ? postData.data : {});
+        output.success = true;
+        break;
+
+      case 'clearAllData':
+        output.data = clearAllData((postData && postData.data) ? postData.data : {});
         output.success = true;
         break;
 
@@ -531,6 +555,152 @@ function addUserRecord(userData) {
 
   delete newUser.passwordHash;
   return newUser;
+}
+
+// Sheets that hold business data (safe to wipe and re-populate)
+function getDataSheetNames() {
+  return ['Products', 'DailySales', 'DailySalesItems', 'Inventory', 'InventoryTransactions', 'Expenses', 'Suppliers'];
+}
+
+// Row counts for every managed sheet (headers excluded)
+function getDataSummary() {
+  var ss = SpreadsheetApp.getActiveSpreadsheet();
+  var names = getDataSheetNames().concat(['Users', 'Settings']);
+  return names.map(function(name) {
+    var sheet = ss.getSheetByName(name);
+    return {
+      sheet: name,
+      exists: Boolean(sheet),
+      rows: sheet ? Math.max(0, sheet.getLastRow() - 1) : 0
+    };
+  });
+}
+
+// Remove every data row of a single sheet, keeping the header row
+function clearSheetRows(sheetName) {
+  var ss = SpreadsheetApp.getActiveSpreadsheet();
+  var sheet = ss.getSheetByName(sheetName);
+  if (!sheet) throw new Error('Sheet not found: ' + sheetName);
+
+  var lastRow = sheet.getLastRow();
+  var deleted = 0;
+  if (lastRow > 1) {
+    sheet.deleteRows(2, lastRow - 1);
+    deleted = lastRow - 1;
+  }
+  return { sheet: sheetName, rowsDeleted: deleted };
+}
+
+// Clear a single sheet
+function clearSheetData(options) {
+  var sheetName = String((options && options.sheet) || (options && options.sheetName) || '').trim();
+  if (!sheetName) throw new Error('Sheet name is required.');
+  return clearSheetRows(sheetName);
+}
+
+// Clear all (or selected) sheets at once
+function clearAllData(options) {
+  options = options || {};
+  var includeUsers = options.includeUsers === true || options.includeUsers === 'true';
+  var requested = options.sheets;
+
+  var targets;
+  if (typeof requested === 'string' && requested) {
+    targets = requested.split(',').map(function(s) { return s.trim(); }).filter(function(s) { return s; });
+  } else if (requested && requested.length) {
+    targets = requested.slice();
+  } else {
+    targets = getDataSheetNames();
+  }
+
+  if (includeUsers && targets.indexOf('Users') === -1) {
+    targets.push('Users');
+  }
+
+  var cleared = [];
+  targets.forEach(function(name) {
+    try {
+      cleared.push(clearSheetRows(name));
+    } catch (err) {
+      cleared.push({ sheet: name, rowsDeleted: 0, error: err.toString() });
+    }
+  });
+
+  // Recreate the default admin login when the Users sheet was wiped
+  if (cleared.some(function(c) { return c.sheet === 'Users' && !c.error; })) {
+    var userSheet = SpreadsheetApp.getActiveSpreadsheet().getSheetByName('Users');
+    if (userSheet && userSheet.getLastRow() <= 1) {
+      var now = new Date().toISOString();
+      userSheet.appendRow(['USER-001', 'bereket', sha256Hex('beki@moshaga@123'), 'Admin', 'Active', now, now]);
+      cleared.push({ sheet: 'Users (default admin restored)', rowsDeleted: 0 });
+    }
+  }
+
+  return { cleared: cleared, timestamp: new Date().toISOString() };
+}
+
+function changeUserCredentials(userData) {
+  var userId = String(userData.userId || '').trim();
+  var currentUsername = String(userData.currentUsername || userData.username || '').trim();
+  var currentPassword = String(userData.currentPassword || userData.oldPassword || '');
+  var newUsername = String(userData.newUsername || userData.username || '').trim();
+  var newPassword = String(userData.newPassword || userData.password || '');
+  var role = userData.role;
+  var status = userData.status;
+
+  var users = getSheetData('Users');
+  var user = null;
+
+  if (userId) {
+    user = users.find(function(u) { return String(u.userId || '').trim() === userId; });
+  } else if (currentUsername) {
+    user = users.find(function(u) { return String(u.username || '').trim().toLowerCase() === currentUsername.toLowerCase(); });
+  }
+
+  if (!user) {
+    throw new Error('User not found.');
+  }
+  if (String(user.status || '').toLowerCase() !== 'active') {
+    throw new Error('User is not active.');
+  }
+
+  if (currentPassword) {
+    if (user.passwordHash !== sha256Hex(currentPassword)) {
+      throw new Error('Current password is incorrect.');
+    }
+  }
+
+  // Determine new username (default keep existing)
+  if (!newUsername) newUsername = user.username;
+  if (newUsername && newUsername.toLowerCase() !== String(user.username || '').toLowerCase()) {
+    var exists = users.some(function(u) {
+      return String(u.userId || '').trim() !== String(user.userId || '').trim() &&
+        String(u.username || '').trim().toLowerCase() === newUsername.toLowerCase();
+    });
+    if (exists) {
+      throw new Error('Username already taken.');
+    }
+  }
+
+  var updates = { updatedAt: new Date().toISOString() };
+  if (newUsername && newUsername !== user.username) {
+    updates.username = newUsername;
+  }
+  if (newPassword) {
+    updates.passwordHash = sha256Hex(newPassword);
+  }
+  if (role) updates.role = role;
+  if (status) updates.status = status;
+
+  updateRecord('Users', 'User ID', user.userId, updates);
+
+  var updatedUser = {
+    userId: user.userId,
+    username: newUsername || user.username,
+    role: role || user.role || 'User',
+    status: status || user.status || 'Active'
+  };
+  return updatedUser;
 }
 
 function sha256Hex(value) {

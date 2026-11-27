@@ -3,11 +3,13 @@ import { Sidebar } from './Sidebar';
 import { Header } from './Header';
 import { Toast } from '../UI/Toast';
 import { SettingsModal } from '../Forms/SettingsModal';
+import { ChangeCredentialsModal } from '../Forms/ChangeCredentialsModal';
 import { getScriptUrl, api } from '../../services/api';
 
-export const Layout = ({ children, currentUser, onLogout }) => {
+export const Layout = ({ children, currentUser, onLogout, onUserUpdated }) => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [settingsOpen, setSettingsOpen] = useState(false);
+  const [changeCredsOpen, setChangeCredsOpen] = useState(false);
   const [toast, setToast] = useState(null);
   const [isGoogleSheetsConnected, setIsGoogleSheetsConnected] = useState(Boolean(getScriptUrl()));
   const [lowStockCount, setLowStockCount] = useState(0);
@@ -55,6 +57,7 @@ export const Layout = ({ children, currentUser, onLogout }) => {
           onOpenSidebar={() => setSidebarOpen(true)}
           isGoogleSheetsConnected={isGoogleSheetsConnected}
           onOpenSettings={() => setSettingsOpen(true)}
+          onOpenChangeCredentials={() => setChangeCredsOpen(true)}
           currentUser={currentUser}
           onLogout={onLogout}
         />
@@ -74,6 +77,17 @@ export const Layout = ({ children, currentUser, onLogout }) => {
         isOpen={settingsOpen}
         onClose={() => setSettingsOpen(false)}
         onUrlUpdated={updateConnectionState}
+        showToast={showToast}
+      />
+
+      {/* Change Password / Username Modal */}
+      <ChangeCredentialsModal
+        isOpen={changeCredsOpen}
+        onClose={() => setChangeCredsOpen(false)}
+        currentUser={currentUser}
+        onUpdated={(updated) => {
+          if (onUserUpdated) onUserUpdated(updated);
+        }}
         showToast={showToast}
       />
     </div>

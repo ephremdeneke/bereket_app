@@ -114,6 +114,18 @@ export const AppsScriptSetup = ({ showToast }) => {
         </form>
       </div>
 
+      {/* Data management note */}
+      <div className="bg-white p-6 rounded-2xl border border-slate-200/80 shadow-xs space-y-3">
+        <h3 className="text-base font-bold text-slate-900">Step 4: Clear / Reset Your Data</h3>
+        <p className="text-xs text-slate-600 leading-relaxed">
+          The backend code below includes the <code className="bg-slate-200 px-1 py-0.5 rounded">clearAllData</code>,{' '}
+          <code className="bg-slate-200 px-1 py-0.5 rounded">clearSheetData</code> and{' '}
+          <code className="bg-slate-200 px-1 py-0.5 rounded">getDataSummary</code> actions. After copying the updated
+          code and redeploying the Web App, open the <strong>Data Management</strong> page from the sidebar to view row
+          counts and wipe all records (or a single sheet) from your Google Sheet.
+        </p>
+      </div>
+
       {/* 3 Step Setup Walkthrough */}
       <div className="bg-white p-6 rounded-2xl border border-slate-200/80 shadow-xs space-y-6">
         <h3 className="text-lg font-bold text-slate-900">Setup Instructions (3 Simple Steps)</h3>
@@ -136,7 +148,7 @@ export const AppsScriptSetup = ({ showToast }) => {
               <p className="text-xs text-slate-600 leading-relaxed">
                 Delete existing contents in <code className="bg-slate-200 px-1 py-0.5 rounded">Code.gs</code>, paste the backend code from below using the <strong>Copy Entire Backend Code</strong> button, and click <strong>Save (Ctrl+S)</strong>.
                 Do <strong>not</strong> paste the raw <code className="bg-slate-200 px-1 py-0.5 rounded">googleAppsScriptCode.js</code> file, and do not include any <code className="bg-slate-200 px-1 py-0.5 rounded">export const ...</code> line.
-                Then select <code className="bg-slate-200 px-1 py-0.5 rounded">setupDatabaseSheets</code> in the function dropdown and click <strong>Run</strong> once to create all database sheets, including <strong>Users</strong>. The default admin login is <code className="bg-slate-200 px-1 py-0.5 rounded">admin</code> / <code className="bg-slate-200 px-1 py-0.5 rounded">admin123</code>.
+                Then select <code className="bg-slate-200 px-1 py-0.5 rounded">setupDatabaseSheets</code> in the function dropdown and click <strong>Run</strong> once to create all database sheets, including <strong>Users</strong>. The default admin login is <code className="bg-slate-200 px-1 py-0.5 rounded">bereket</code> / <code className="bg-slate-200 px-1 py-0.5 rounded">beki@moshaga@123</code>.
               </p>
             </div>
           </div>

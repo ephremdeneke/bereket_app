@@ -4,7 +4,7 @@ import { api } from '../services/api';
 import { setCurrentUser } from '../utils/auth';
 
 export const Login = ({ onLogin }) => {
-  const [username, setUsername] = useState('admin');
+  const [username, setUsername] = useState('bereket');
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
@@ -79,10 +79,6 @@ export const Login = ({ onLogin }) => {
             <span>{loading ? 'Signing in...' : 'Sign In'}</span>
           </button>
         </form>
-
-        <p className="mt-4 text-[11px] text-slate-500 leading-relaxed">
-          Default setup creates <code className="bg-slate-100 px-1 rounded">admin</code> / <code className="bg-slate-100 px-1 rounded">admin123</code>. Change this password after first login by adding a new user from the Users sheet.
-        </p>
       </div>
     </div>
   );

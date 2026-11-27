@@ -9,8 +9,9 @@ import { Inventory } from './pages/Inventory';
 import { Expenses } from './pages/Expenses';
 import { Reports } from './pages/Reports';
 import { AppsScriptSetup } from './pages/AppsScriptSetup';
+import { DataManagement } from './pages/DataManagement';
 import { Login } from './pages/Login';
-import { getCurrentUser, logout } from './utils/auth';
+import { getCurrentUser, setCurrentUser as persistCurrentUser, logout } from './utils/auth';
 
 export default function App() {
   const [currentUser, setCurrentUser] = useState(getCurrentUser());
@@ -20,13 +21,21 @@ export default function App() {
     setCurrentUser(null);
   };
 
+  const handleUserUpdated = (user) => {
+    if (user) {
+      const merged = { ...currentUser, ...user };
+      persistCurrentUser(merged);
+      setCurrentUser(merged);
+    }
+  };
+
   if (!currentUser) {
     return <Login onLogin={setCurrentUser} />;
   }
 
   return (
     <Router>
-      <Layout currentUser={currentUser} onLogout={handleLogout}>
+      <Layout currentUser={currentUser} onLogout={handleLogout} onUserUpdated={handleUserUpdated}>
         {({ showToast, refreshLowStockCount }) => (
           <Routes>
             <Route path="/" element={<Dashboard showToast={showToast} />} />
@@ -37,6 +46,7 @@ export default function App() {
             <Route path="/expenses" element={<Expenses showToast={showToast} />} />
             <Route path="/reports" element={<Reports showToast={showToast} />} />
             <Route path="/sheets-setup" element={<AppsScriptSetup showToast={showToast} />} />
+            <Route path="/data-management" element={<DataManagement showToast={showToast} />} />
             <Route path="*" element={<Navigate to="/" replace />} />
           </Routes>
         )}

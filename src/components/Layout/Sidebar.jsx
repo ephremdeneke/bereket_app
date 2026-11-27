@@ -9,6 +9,7 @@ import {
   Receipt,
   BarChart3,
   Sheet,
+  Database,
   X
 } from 'lucide-react';
 
@@ -28,6 +29,7 @@ export const Sidebar = ({ isOpen, onClose, lowStockCount = 0 }) => {
     { label: 'Expenses', path: '/expenses', icon: Receipt },
     { label: 'Reports', path: '/reports', icon: BarChart3 },
     { label: 'Google Sheets API', path: '/sheets-setup', icon: Sheet },
+    { label: 'Data Management', path: '/data-management', icon: Database },
   ];
 
   return (
