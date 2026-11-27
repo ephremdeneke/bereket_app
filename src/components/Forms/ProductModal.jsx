@@ -36,24 +36,24 @@ export const ProductModal = ({ isOpen, product, onSave, onClose }) => {
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/50 backdrop-blur-xs animate-fadeIn">
-      <div className="bg-white rounded-2xl max-w-md w-full p-6 shadow-2xl border border-slate-100">
-        <div className="flex items-center justify-between pb-4 border-b border-slate-100">
+      <div className="bg-white dark:bg-slate-900 rounded-2xl max-w-md w-full p-6 shadow-2xl border border-slate-100 dark:border-slate-800">
+        <div className="flex items-center justify-between pb-4 border-b border-slate-100 dark:border-slate-800">
           <div className="flex items-center gap-3">
-            <div className="p-2.5 bg-amber-50 text-amber-800 rounded-xl">
+            <div className="p-2.5 bg-amber-50 dark:bg-amber-900/30 text-amber-800 rounded-xl">
               <Coffee className="w-5 h-5" />
             </div>
-            <h3 className="text-lg font-bold text-slate-900">
+            <h3 className="text-lg font-bold text-slate-900 dark:text-slate-100">
               {product ? 'Edit Product & Price' : 'Add New Drink Product'}
             </h3>
           </div>
-          <button onClick={onClose} className="text-slate-400 hover:text-slate-600 p-1 rounded-lg">
+          <button onClick={onClose} className="text-slate-400 dark:text-slate-300 hover:text-slate-600 dark:text-slate-400 p-1 rounded-lg">
             <X className="w-5 h-5" />
           </button>
         </div>
 
         <form onSubmit={handleSubmit} className="mt-5 space-y-4">
           <div>
-            <label className="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-1">
+            <label className="block text-xs font-bold uppercase tracking-wider text-slate-700 dark:text-slate-300 mb-1">
               Product Name
             </label>
             <input
@@ -62,18 +62,18 @@ export const ProductModal = ({ isOpen, product, onSave, onClose }) => {
               placeholder="e.g. Moshaga Special Blend"
               value={name}
               onChange={(e) => setName(e.target.value)}
-              className="w-full px-4 py-2.5 text-sm bg-slate-50 border border-slate-300 rounded-xl focus:ring-2 focus:ring-amber-500 focus:border-amber-500"
+              className="w-full px-4 py-2.5 text-sm bg-slate-50 dark:bg-slate-950 border border-slate-300 dark:border-slate-600 rounded-xl focus:ring-2 focus:ring-amber-500 focus:border-amber-500"
             />
           </div>
 
           <div>
-            <label className="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-1">
+            <label className="block text-xs font-bold uppercase tracking-wider text-slate-700 dark:text-slate-300 mb-1">
               Category
             </label>
             <select
               value={category}
               onChange={(e) => setCategory(e.target.value)}
-              className="w-full px-4 py-2.5 text-sm bg-slate-50 border border-slate-300 rounded-xl focus:ring-2 focus:ring-amber-500 focus:border-amber-500"
+              className="w-full px-4 py-2.5 text-sm bg-slate-50 dark:bg-slate-950 border border-slate-300 dark:border-slate-600 rounded-xl focus:ring-2 focus:ring-amber-500 focus:border-amber-500"
             >
               <option value="Hot Coffee">Hot Coffee</option>
               <option value="Hot Tea">Hot Tea</option>
@@ -84,7 +84,7 @@ export const ProductModal = ({ isOpen, product, onSave, onClose }) => {
           </div>
 
           <div>
-            <label className="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-1">
+            <label className="block text-xs font-bold uppercase tracking-wider text-slate-700 dark:text-slate-300 mb-1">
               Selling Price (ETB)
             </label>
             <input
@@ -95,16 +95,16 @@ export const ProductModal = ({ isOpen, product, onSave, onClose }) => {
               placeholder="e.g. 80"
               value={sellingPrice}
               onChange={(e) => setSellingPrice(e.target.value)}
-              className="w-full px-4 py-2.5 text-base font-bold bg-slate-50 border border-slate-300 rounded-xl focus:ring-2 focus:ring-amber-500 focus:border-amber-500"
+              className="w-full px-4 py-2.5 text-base font-bold bg-slate-50 dark:bg-slate-950 border border-slate-300 dark:border-slate-600 rounded-xl focus:ring-2 focus:ring-amber-500 focus:border-amber-500"
             />
           </div>
 
           <div>
-            <label className="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-1">
+            <label className="block text-xs font-bold uppercase tracking-wider text-slate-700 dark:text-slate-300 mb-1">
               Status
             </label>
             <div className="flex gap-4">
-              <label className="flex items-center gap-2 text-sm font-medium text-slate-700 cursor-pointer">
+              <label className="flex items-center gap-2 text-sm font-medium text-slate-700 dark:text-slate-300 cursor-pointer">
                 <input
                   type="radio"
                   name="status"
@@ -115,7 +115,7 @@ export const ProductModal = ({ isOpen, product, onSave, onClose }) => {
                 />
                 Active (Available for daily sales)
               </label>
-              <label className="flex items-center gap-2 text-sm font-medium text-slate-700 cursor-pointer">
+              <label className="flex items-center gap-2 text-sm font-medium text-slate-700 dark:text-slate-300 cursor-pointer">
                 <input
                   type="radio"
                   name="status"
@@ -129,11 +129,11 @@ export const ProductModal = ({ isOpen, product, onSave, onClose }) => {
             </div>
           </div>
 
-          <div className="pt-4 border-t border-slate-100 flex items-center justify-end gap-3">
+          <div className="pt-4 border-t border-slate-100 dark:border-slate-800 flex items-center justify-end gap-3">
             <button
               type="button"
               onClick={onClose}
-              className="px-4 py-2 text-sm font-medium text-slate-700 hover:bg-slate-100 rounded-xl transition-colors"
+              className="px-4 py-2 text-sm font-medium text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:bg-slate-800 rounded-xl transition-colors"
             >
               Cancel
             </button>

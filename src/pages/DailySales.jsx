@@ -58,14 +58,14 @@ export const DailySales = ({ showToast }) => {
   return (
     <div className="space-y-6 max-w-5xl mx-auto">
       {/* Top Banner */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-white p-5 rounded-2xl border border-slate-200/80 shadow-xs">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-white dark:bg-slate-900 p-5 rounded-2xl border border-slate-200/80 dark:border-slate-700/80 shadow-xs">
         <div className="flex items-center gap-3">
-          <div className="p-3 bg-amber-50 text-amber-800 rounded-2xl">
+          <div className="p-3 bg-amber-50 dark:bg-amber-900/30 text-amber-800 rounded-2xl">
             <CalendarPlus className="w-6 h-6" />
           </div>
           <div>
-            <h2 className="text-xl font-extrabold text-slate-900 tracking-tight">Daily Sales Recording</h2>
-            <p className="text-xs text-slate-500 font-medium">
+            <h2 className="text-xl font-extrabold text-slate-900 dark:text-slate-100 tracking-tight">Daily Sales Recording</h2>
+            <p className="text-xs text-slate-500 dark:text-slate-400 font-medium">
               Record drink quantities sold today. System automatically calculates sales and reconciles Cash & Bank.
             </p>
           </div>
@@ -73,7 +73,7 @@ export const DailySales = ({ showToast }) => {
 
         <button
           onClick={() => navigate('/sales-history')}
-          className="flex items-center gap-2 px-4 py-2 text-xs font-bold text-slate-700 bg-slate-100 hover:bg-slate-200 rounded-xl transition-colors shrink-0"
+          className="flex items-center gap-2 px-4 py-2 text-xs font-bold text-slate-700 dark:text-slate-300 bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:bg-slate-700 rounded-xl transition-colors shrink-0"
         >
           <History className="w-4 h-4" />
           <span>View Sales History</span>

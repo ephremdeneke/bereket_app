@@ -56,14 +56,14 @@ export const SalesHistory = ({ showToast }) => {
   return (
     <div className="space-y-6">
       {/* Top Banner */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-white p-5 rounded-2xl border border-slate-200/80 shadow-xs">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-white dark:bg-slate-900 p-5 rounded-2xl border border-slate-200/80 dark:border-slate-700/80 shadow-xs">
         <div className="flex items-center gap-3">
-          <div className="p-3 bg-amber-50 text-amber-800 rounded-2xl">
+          <div className="p-3 bg-amber-50 dark:bg-amber-900/30 text-amber-800 rounded-2xl">
             <History className="w-6 h-6" />
           </div>
           <div>
-            <h2 className="text-xl font-extrabold text-slate-900 tracking-tight">Sales History & Audit Logs</h2>
-            <p className="text-xs text-slate-500 font-medium">
+            <h2 className="text-xl font-extrabold text-slate-900 dark:text-slate-100 tracking-tight">Sales History & Audit Logs</h2>
+            <p className="text-xs text-slate-500 dark:text-slate-400 font-medium">
               Complete archive of manager daily sales recordings and reconciliation balances.
             </p>
           </div>
@@ -78,7 +78,7 @@ export const SalesHistory = ({ showToast }) => {
       </div>
 
       {/* Filter and Search Bar */}
-      <div className="bg-white p-4 rounded-2xl border border-slate-200/80 shadow-xs flex flex-col md:flex-row items-center justify-between gap-3">
+      <div className="bg-white dark:bg-slate-900 p-4 rounded-2xl border border-slate-200/80 dark:border-slate-700/80 shadow-xs flex flex-col md:flex-row items-center justify-between gap-3">
         {/* Search Input */}
         <div className="relative w-full md:w-80">
           <input
@@ -86,19 +86,19 @@ export const SalesHistory = ({ showToast }) => {
             placeholder="Search by notes or date..."
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
-            className="w-full pl-9 pr-4 py-2 text-sm bg-slate-50 border border-slate-300 rounded-xl focus:ring-2 focus:ring-amber-500"
+            className="w-full pl-9 pr-4 py-2 text-sm bg-slate-50 dark:bg-slate-950 border border-slate-300 dark:border-slate-600 rounded-xl focus:ring-2 focus:ring-amber-500"
           />
-          <Search className="w-4 h-4 text-slate-400 absolute left-3 top-3" />
+          <Search className="w-4 h-4 text-slate-400 dark:text-slate-300 absolute left-3 top-3" />
         </div>
 
         <div className="flex flex-wrap items-center gap-3 w-full md:w-auto">
           {/* Status Filter */}
           <div className="flex items-center gap-1.5">
-            <span className="text-xs font-bold text-slate-600">Status:</span>
+            <span className="text-xs font-bold text-slate-600 dark:text-slate-400">Status:</span>
             <select
               value={statusFilter}
               onChange={(e) => setStatusFilter(e.target.value)}
-              className="px-3 py-2 text-xs font-semibold bg-slate-50 border border-slate-300 rounded-xl focus:ring-2 focus:ring-amber-500"
+              className="px-3 py-2 text-xs font-semibold bg-slate-50 dark:bg-slate-950 border border-slate-300 dark:border-slate-600 rounded-xl focus:ring-2 focus:ring-amber-500"
             >
               <option value="All">All Statuses</option>
               <option value="Matched">Matched Only</option>
@@ -108,12 +108,12 @@ export const SalesHistory = ({ showToast }) => {
 
           {/* Date Picker Filter */}
           <div className="flex items-center gap-1.5">
-            <span className="text-xs font-bold text-slate-600">Date:</span>
+            <span className="text-xs font-bold text-slate-600 dark:text-slate-400">Date:</span>
             <input
               type="date"
               value={dateFilter}
               onChange={(e) => setDateFilter(e.target.value)}
-              className="px-3 py-1.5 text-xs font-semibold bg-slate-50 border border-slate-300 rounded-xl focus:ring-2 focus:ring-amber-500"
+              className="px-3 py-1.5 text-xs font-semibold bg-slate-50 dark:bg-slate-950 border border-slate-300 dark:border-slate-600 rounded-xl focus:ring-2 focus:ring-amber-500"
             />
             {dateFilter && (
               <button
@@ -136,10 +136,10 @@ export const SalesHistory = ({ showToast }) => {
           onAction={() => navigate('/daily-sales')}
         />
       ) : (
-        <div className="bg-white rounded-2xl border border-slate-200/80 shadow-xs overflow-hidden">
+        <div className="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200/80 dark:border-slate-700/80 shadow-xs overflow-hidden">
           <div className="overflow-x-auto">
             <table className="w-full text-left text-sm">
-              <thead className="bg-slate-50 text-slate-600 font-semibold border-b border-slate-100 text-xs uppercase tracking-wider">
+              <thead className="bg-slate-50 dark:bg-slate-950 text-slate-600 dark:text-slate-400 font-semibold border-b border-slate-100 dark:border-slate-800 text-xs uppercase tracking-wider">
                 <tr>
                   <th className="py-3.5 px-5">Date</th>
                   <th className="py-3.5 px-5 text-right">Calculated Sales</th>
@@ -152,17 +152,17 @@ export const SalesHistory = ({ showToast }) => {
               </thead>
               <tbody className="divide-y divide-slate-100">
                 {filteredSales.map((report) => (
-                  <tr key={report.id || report.date} className="hover:bg-slate-50/80 transition-colors">
-                    <td className="py-4 px-5 font-bold text-slate-900">
+                  <tr key={report.id || report.date} className="hover:bg-slate-50/80 dark:bg-slate-950/80 transition-colors">
+                    <td className="py-4 px-5 font-bold text-slate-900 dark:text-slate-100">
                       {formatDate(report.date)}
                       {report.notes && (
-                        <p className="text-xs font-normal text-slate-500 truncate max-w-xs mt-0.5">
+                        <p className="text-xs font-normal text-slate-500 dark:text-slate-400 truncate max-w-xs mt-0.5">
                           {report.notes}
                         </p>
                       )}
                     </td>
 
-                    <td className="py-4 px-5 text-right font-extrabold text-amber-900">
+                    <td className="py-4 px-5 text-right font-extrabold text-amber-900 dark:text-amber-200">
                       {formatCurrency(report.calculatedSales)}
                     </td>
 
@@ -190,7 +190,7 @@ export const SalesHistory = ({ showToast }) => {
                       <div className="flex items-center justify-end gap-2">
                         <button
                           onClick={() => setSelectedReport(report)}
-                          className="p-1.5 rounded-lg text-slate-600 hover:text-amber-800 hover:bg-amber-50 transition-colors"
+                          className="p-1.5 rounded-lg text-slate-600 dark:text-slate-400 hover:text-amber-800 hover:bg-amber-50 dark:bg-amber-900/30 transition-colors"
                           title="View Itemized Breakdown"
                         >
                           <Eye className="w-4 h-4" />
@@ -208,40 +208,40 @@ export const SalesHistory = ({ showToast }) => {
       {/* Itemized Report Details Modal */}
       {selectedReport && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/50 backdrop-blur-xs animate-fadeIn">
-          <div className="bg-white rounded-2xl max-w-2xl w-full p-6 shadow-2xl border border-slate-100 max-h-[90vh] overflow-y-auto">
-            <div className="flex items-center justify-between pb-4 border-b border-slate-100">
+          <div className="bg-white dark:bg-slate-900 rounded-2xl max-w-2xl w-full p-6 shadow-2xl border border-slate-100 dark:border-slate-800 max-h-[90vh] overflow-y-auto">
+            <div className="flex items-center justify-between pb-4 border-b border-slate-100 dark:border-slate-800">
               <div className="flex items-center gap-3">
-                <div className="p-2.5 bg-amber-50 text-amber-800 rounded-xl">
+                <div className="p-2.5 bg-amber-50 dark:bg-amber-900/30 text-amber-800 rounded-xl">
                   <FileSpreadsheet className="w-5 h-5" />
                 </div>
                 <div>
-                  <h3 className="text-lg font-bold text-slate-900">
+                  <h3 className="text-lg font-bold text-slate-900 dark:text-slate-100">
                     Daily Sales Report ({formatDate(selectedReport.date)})
                   </h3>
-                  <p className="text-xs text-slate-500 font-medium">ID: {selectedReport.salesId || selectedReport.id}</p>
+                  <p className="text-xs text-slate-500 dark:text-slate-400 font-medium">ID: {selectedReport.salesId || selectedReport.id}</p>
                 </div>
               </div>
-              <button onClick={() => setSelectedReport(null)} className="text-slate-400 hover:text-slate-600 p-1 rounded-lg">
+              <button onClick={() => setSelectedReport(null)} className="text-slate-400 dark:text-slate-300 hover:text-slate-600 dark:text-slate-400 p-1 rounded-lg">
                 <X className="w-5 h-5" />
               </button>
             </div>
 
             {/* Reconciliation status summary */}
-            <div className="mt-4 p-4 rounded-xl bg-slate-50 border border-slate-200 grid grid-cols-2 sm:grid-cols-4 gap-3 text-sm">
+            <div className="mt-4 p-4 rounded-xl bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-700 grid grid-cols-2 sm:grid-cols-4 gap-3 text-sm">
               <div>
-                <span className="text-xs text-slate-500 block font-medium">Calculated Sales</span>
-                <span className="font-extrabold text-amber-900 text-base">{formatCurrency(selectedReport.calculatedSales)}</span>
+                <span className="text-xs text-slate-500 dark:text-slate-400 block font-medium">Calculated Sales</span>
+                <span className="font-extrabold text-amber-900 dark:text-amber-200 text-base">{formatCurrency(selectedReport.calculatedSales)}</span>
               </div>
               <div>
-                <span className="text-xs text-slate-500 block font-medium">Cash Sales</span>
+                <span className="text-xs text-slate-500 dark:text-slate-400 block font-medium">Cash Sales</span>
                 <span className="font-bold text-teal-800">{formatCurrency(selectedReport.cashSales)}</span>
               </div>
               <div>
-                <span className="text-xs text-slate-500 block font-medium">Bank Sales</span>
+                <span className="text-xs text-slate-500 dark:text-slate-400 block font-medium">Bank Sales</span>
                 <span className="font-bold text-indigo-800">{formatCurrency(selectedReport.bankSales)}</span>
               </div>
               <div>
-                <span className="text-xs text-slate-500 block font-medium">Status</span>
+                <span className="text-xs text-slate-500 dark:text-slate-400 block font-medium">Status</span>
                 <Badge variant={selectedReport.reconciliationStatus === 'Matched' ? 'matched' : 'mismatch'}>
                   {selectedReport.reconciliationStatus} ({formatCurrency(selectedReport.difference)})
                 </Badge>
@@ -250,10 +250,10 @@ export const SalesHistory = ({ showToast }) => {
 
             {/* Drink Item Breakdown Table */}
             <div className="mt-5">
-              <h4 className="text-sm font-bold text-slate-900 mb-2">Drink Breakdown Quantities</h4>
-              <div className="border border-slate-200 rounded-xl overflow-hidden text-sm">
+              <h4 className="text-sm font-bold text-slate-900 dark:text-slate-100 mb-2">Drink Breakdown Quantities</h4>
+              <div className="border border-slate-200 dark:border-slate-700 rounded-xl overflow-hidden text-sm">
                 <table className="w-full text-left">
-                  <thead className="bg-slate-100 text-slate-700 font-semibold text-xs uppercase">
+                  <thead className="bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 font-semibold text-xs uppercase">
                     <tr>
                       <th className="py-2.5 px-4">Drink Product</th>
                       <th className="py-2.5 px-4 text-center">Qty Sold</th>
@@ -263,10 +263,10 @@ export const SalesHistory = ({ showToast }) => {
                   </thead>
                   <tbody className="divide-y divide-slate-100">
                     {selectedReport.items && selectedReport.items.map((item, idx) => (
-                      <tr key={idx} className="hover:bg-slate-50">
-                        <td className="py-2.5 px-4 font-bold text-slate-900">{item.productName}</td>
-                        <td className="py-2.5 px-4 text-center font-bold text-amber-900">{item.quantity}</td>
-                        <td className="py-2.5 px-4 text-right text-slate-600">{formatCurrency(item.unitPrice)}</td>
+                      <tr key={idx} className="hover:bg-slate-50 dark:bg-slate-950">
+                        <td className="py-2.5 px-4 font-bold text-slate-900 dark:text-slate-100">{item.productName}</td>
+                        <td className="py-2.5 px-4 text-center font-bold text-amber-900 dark:text-amber-200">{item.quantity}</td>
+                        <td className="py-2.5 px-4 text-right text-slate-600 dark:text-slate-400">{formatCurrency(item.unitPrice)}</td>
                         <td className="py-2.5 px-4 text-right font-extrabold text-amber-950">{formatCurrency(item.calculatedAmount)}</td>
                       </tr>
                     ))}
@@ -276,8 +276,8 @@ export const SalesHistory = ({ showToast }) => {
             </div>
 
             {selectedReport.notes && (
-              <div className="mt-4 p-3 bg-amber-50/50 border border-amber-200/60 rounded-xl text-xs text-slate-700">
-                <span className="font-bold text-amber-900 block mb-0.5">Shift Notes:</span>
+              <div className="mt-4 p-3 bg-amber-50/50 dark:bg-amber-900/30/50 border border-amber-200/60 dark:border-amber-700/50/60 rounded-xl text-xs text-slate-700 dark:text-slate-300">
+                <span className="font-bold text-amber-900 dark:text-amber-200 block mb-0.5">Shift Notes:</span>
                 {selectedReport.notes}
               </div>
             )}

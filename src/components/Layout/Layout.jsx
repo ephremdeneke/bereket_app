@@ -13,6 +13,20 @@ export const Layout = ({ children, currentUser, onLogout, onUserUpdated }) => {
   const [toast, setToast] = useState(null);
   const [isGoogleSheetsConnected, setIsGoogleSheetsConnected] = useState(Boolean(getScriptUrl()));
   const [lowStockCount, setLowStockCount] = useState(0);
+  const [darkMode, setDarkMode] = useState(() => {
+    try {
+      const saved = localStorage.getItem('moshaga_theme');
+      if (saved) return saved === 'dark';
+      return window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+    } catch (e) {
+      return false;
+    }
+  });
+
+  useEffect(() => {
+    document.documentElement.classList.toggle('dark', darkMode);
+    try { localStorage.setItem('moshaga_theme', darkMode ? 'dark' : 'light'); } catch (e) {}
+  }, [darkMode]);
 
   const showToast = ({ type, message }) => {
     setToast({ type, message });
@@ -43,7 +57,7 @@ export const Layout = ({ children, currentUser, onLogout, onUserUpdated }) => {
   }, []);
 
   return (
-    <div className="min-h-screen flex bg-slate-50 text-slate-900 font-sans">
+    <div className="min-h-screen flex bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-slate-100 font-sans">
       {/* Sidebar navigation */}
       <Sidebar 
         isOpen={sidebarOpen}
@@ -60,6 +74,8 @@ export const Layout = ({ children, currentUser, onLogout, onUserUpdated }) => {
           onOpenChangeCredentials={() => setChangeCredsOpen(true)}
           currentUser={currentUser}
           onLogout={onLogout}
+          darkMode={darkMode}
+          onToggleTheme={() => setDarkMode((v) => !v)}
         />
 
         <main className="flex-1 p-4 sm:p-6 lg:p-8 max-w-7xl w-full mx-auto">

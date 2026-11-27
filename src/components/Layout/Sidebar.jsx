@@ -62,7 +62,7 @@ export const Sidebar = ({ isOpen, onClose, lowStockCount = 0 }) => {
 
           <button 
             onClick={onClose}
-            className="lg:hidden text-slate-400 hover:text-white p-1 rounded-lg"
+            className="lg:hidden text-slate-400 dark:text-slate-300 hover:text-white p-1 rounded-lg"
           >
             <X className="w-5 h-5" />
           </button>
@@ -81,7 +81,7 @@ export const Sidebar = ({ isOpen, onClose, lowStockCount = 0 }) => {
                   flex items-center justify-between px-3.5 py-2.5 rounded-xl font-medium text-sm transition-all duration-150
                   ${isActive 
                     ? 'bg-amber-700/90 text-white shadow-sm font-semibold' 
-                    : 'text-slate-400 hover:text-slate-100 hover:bg-slate-800/60'}
+                    : 'text-slate-400 dark:text-slate-300 hover:text-slate-100 hover:bg-slate-800/60'}
                 `}
               >
                 <div className="flex items-center gap-3">
@@ -99,12 +99,12 @@ export const Sidebar = ({ isOpen, onClose, lowStockCount = 0 }) => {
         </nav>
 
         {/* System footer */}
-        <div className="p-4 border-t border-slate-800 bg-slate-950/40 text-xs text-slate-400 flex flex-col gap-1">
+        <div className="p-4 border-t border-slate-800 bg-slate-950/40 text-xs text-slate-400 dark:text-slate-300 flex flex-col gap-1">
           <div className="flex items-center justify-between font-medium text-slate-300">
             <span>Business Control System</span>
             <span className="text-[10px] bg-amber-900/50 text-amber-300 px-2 py-0.5 rounded border border-amber-700/40">Manager Only</span>
           </div>
-          <p className="text-[11px] text-slate-500 mt-1">v1.0 • Non-POS Cafe Operating System</p>
+          <p className="text-[11px] text-slate-500 dark:text-slate-400 mt-1">v1.0 • Non-POS Cafe Operating System</p>
         </div>
       </aside>
     </>

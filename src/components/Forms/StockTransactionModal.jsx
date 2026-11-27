@@ -33,20 +33,20 @@ export const StockTransactionModal = ({ isOpen, item, onSave, onClose }) => {
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/50 backdrop-blur-xs animate-fadeIn">
-      <div className="bg-white rounded-2xl max-w-md w-full p-6 shadow-2xl border border-slate-100">
-        <div className="flex items-center justify-between pb-4 border-b border-slate-100">
+      <div className="bg-white dark:bg-slate-900 rounded-2xl max-w-md w-full p-6 shadow-2xl border border-slate-100 dark:border-slate-800">
+        <div className="flex items-center justify-between pb-4 border-b border-slate-100 dark:border-slate-800">
           <div>
-            <h3 className="text-lg font-bold text-slate-900">Record Stock Movement</h3>
-            <p className="text-xs text-slate-500 font-semibold mt-0.5">{item.name} (Current: {item.currentQuantity} {item.unit})</p>
+            <h3 className="text-lg font-bold text-slate-900 dark:text-slate-100">Record Stock Movement</h3>
+            <p className="text-xs text-slate-500 dark:text-slate-400 font-semibold mt-0.5">{item.name} (Current: {item.currentQuantity} {item.unit})</p>
           </div>
-          <button onClick={onClose} className="text-slate-400 hover:text-slate-600 p-1 rounded-lg">
+          <button onClick={onClose} className="text-slate-400 dark:text-slate-300 hover:text-slate-600 dark:text-slate-400 p-1 rounded-lg">
             <X className="w-5 h-5" />
           </button>
         </div>
 
         <form onSubmit={handleSubmit} className="mt-5 space-y-4">
           <div>
-            <label className="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-2">
+            <label className="block text-xs font-bold uppercase tracking-wider text-slate-700 dark:text-slate-300 mb-2">
               Transaction Type
             </label>
             <div className="grid grid-cols-3 gap-2">
@@ -55,8 +55,8 @@ export const StockTransactionModal = ({ isOpen, item, onSave, onClose }) => {
                 onClick={() => setTransactionType('Stock In')}
                 className={`flex flex-col items-center justify-center p-3 rounded-xl border text-xs font-bold transition-all ${
                   transactionType === 'Stock In'
-                    ? 'bg-emerald-50 border-emerald-500 text-emerald-800 ring-2 ring-emerald-500/20'
-                    : 'bg-slate-50 border-slate-200 text-slate-600 hover:bg-slate-100'
+                    ? 'bg-emerald-50 dark:bg-emerald-900/30 border-emerald-500 text-emerald-800 ring-2 ring-emerald-500/20'
+                    : 'bg-slate-50 dark:bg-slate-950 border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:bg-slate-800'
                 }`}
               >
                 <ArrowUpRight className="w-4 h-4 mb-1 text-emerald-600" />
@@ -68,8 +68,8 @@ export const StockTransactionModal = ({ isOpen, item, onSave, onClose }) => {
                 onClick={() => setTransactionType('Stock Out')}
                 className={`flex flex-col items-center justify-center p-3 rounded-xl border text-xs font-bold transition-all ${
                   transactionType === 'Stock Out'
-                    ? 'bg-rose-50 border-rose-500 text-rose-800 ring-2 ring-rose-500/20'
-                    : 'bg-slate-50 border-slate-200 text-slate-600 hover:bg-slate-100'
+                    ? 'bg-rose-50 dark:bg-rose-900/30 border-rose-500 text-rose-800 ring-2 ring-rose-500/20'
+                    : 'bg-slate-50 dark:bg-slate-950 border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:bg-slate-800'
                 }`}
               >
                 <ArrowDownRight className="w-4 h-4 mb-1 text-rose-600" />
@@ -81,8 +81,8 @@ export const StockTransactionModal = ({ isOpen, item, onSave, onClose }) => {
                 onClick={() => setTransactionType('Adjustment')}
                 className={`flex flex-col items-center justify-center p-3 rounded-xl border text-xs font-bold transition-all ${
                   transactionType === 'Adjustment'
-                    ? 'bg-sky-50 border-sky-500 text-sky-800 ring-2 ring-sky-500/20'
-                    : 'bg-slate-50 border-slate-200 text-slate-600 hover:bg-slate-100'
+                    ? 'bg-sky-50 dark:bg-sky-900/30 border-sky-500 text-sky-800 ring-2 ring-sky-500/20'
+                    : 'bg-slate-50 dark:bg-slate-950 border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:bg-slate-800'
                 }`}
               >
                 <RefreshCw className="w-4 h-4 mb-1 text-sky-600" />
@@ -92,7 +92,7 @@ export const StockTransactionModal = ({ isOpen, item, onSave, onClose }) => {
           </div>
 
           <div>
-            <label className="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-1">
+            <label className="block text-xs font-bold uppercase tracking-wider text-slate-700 dark:text-slate-300 mb-1">
               Quantity ({transactionType === 'Adjustment' ? `Set Total Qty (${item.unit})` : `Qty (${item.unit})`})
             </label>
             <input
@@ -102,12 +102,12 @@ export const StockTransactionModal = ({ isOpen, item, onSave, onClose }) => {
               placeholder={transactionType === 'Adjustment' ? 'e.g. 10 (Direct current qty)' : 'e.g. 5'}
               value={quantity}
               onChange={(e) => setQuantity(e.target.value)}
-              className="w-full px-4 py-2.5 text-base font-bold bg-slate-50 border border-slate-300 rounded-xl focus:ring-2 focus:ring-amber-500 focus:border-amber-500"
+              className="w-full px-4 py-2.5 text-base font-bold bg-slate-50 dark:bg-slate-950 border border-slate-300 dark:border-slate-600 rounded-xl focus:ring-2 focus:ring-amber-500 focus:border-amber-500"
             />
           </div>
 
           <div>
-            <label className="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-1">
+            <label className="block text-xs font-bold uppercase tracking-wider text-slate-700 dark:text-slate-300 mb-1">
               Transaction Date
             </label>
             <input
@@ -115,12 +115,12 @@ export const StockTransactionModal = ({ isOpen, item, onSave, onClose }) => {
               required
               value={date}
               onChange={(e) => setDate(e.target.value)}
-              className="w-full px-4 py-2 text-sm bg-slate-50 border border-slate-300 rounded-xl focus:ring-2 focus:ring-amber-500"
+              className="w-full px-4 py-2 text-sm bg-slate-50 dark:bg-slate-950 border border-slate-300 dark:border-slate-600 rounded-xl focus:ring-2 focus:ring-amber-500"
             />
           </div>
 
           <div>
-            <label className="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-1">
+            <label className="block text-xs font-bold uppercase tracking-wider text-slate-700 dark:text-slate-300 mb-1">
               Notes / Description
             </label>
             <input
@@ -128,15 +128,15 @@ export const StockTransactionModal = ({ isOpen, item, onSave, onClose }) => {
               placeholder="e.g. Purchase order delivery from supplier"
               value={description}
               onChange={(e) => setDescription(e.target.value)}
-              className="w-full px-4 py-2 text-sm bg-slate-50 border border-slate-300 rounded-xl focus:ring-2 focus:ring-amber-500"
+              className="w-full px-4 py-2 text-sm bg-slate-50 dark:bg-slate-950 border border-slate-300 dark:border-slate-600 rounded-xl focus:ring-2 focus:ring-amber-500"
             />
           </div>
 
-          <div className="pt-4 border-t border-slate-100 flex items-center justify-end gap-3">
+          <div className="pt-4 border-t border-slate-100 dark:border-slate-800 flex items-center justify-end gap-3">
             <button
               type="button"
               onClick={onClose}
-              className="px-4 py-2 text-sm font-medium text-slate-700 hover:bg-slate-100 rounded-xl transition-colors"
+              className="px-4 py-2 text-sm font-medium text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:bg-slate-800 rounded-xl transition-colors"
             >
               Cancel
             </button>

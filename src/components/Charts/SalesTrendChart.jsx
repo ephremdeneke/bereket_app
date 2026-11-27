@@ -5,7 +5,7 @@ import { formatCurrency } from '../../utils/formatters';
 export const SalesTrendChart = ({ data = [] }) => {
   if (!data || data.length === 0) {
     return (
-      <div className="flex items-center justify-center h-64 text-sm text-slate-400">
+      <div className="flex items-center justify-center h-64 text-sm text-slate-400 dark:text-slate-300">
         No sales data available for graph rendering.
       </div>
     );

@@ -13,9 +13,9 @@ export const Toast = ({ toast, onClose }) => {
   };
 
   const bgStyles = {
-    success: 'bg-emerald-50 border-emerald-200 text-emerald-900',
-    error: 'bg-rose-50 border-rose-200 text-rose-900',
-    info: 'bg-sky-50 border-sky-200 text-sky-900'
+    success: 'bg-emerald-50 dark:bg-emerald-900/30 border-emerald-200 dark:border-emerald-700/50 text-emerald-900 dark:text-emerald-200',
+    error: 'bg-rose-50 dark:bg-rose-900/30 border-rose-200 dark:border-rose-700/50 text-rose-900 dark:text-rose-200',
+    info: 'bg-sky-50 dark:bg-sky-900/30 border-sky-200 dark:border-sky-700/50 text-sky-900 dark:text-sky-200'
   };
 
   return (
@@ -25,7 +25,7 @@ export const Toast = ({ toast, onClose }) => {
         <p className="text-sm font-medium pr-2">{message}</p>
         <button
           onClick={onClose}
-          className="p-1 hover:bg-black/5 rounded-lg transition-colors ml-auto text-slate-500"
+          className="p-1 hover:bg-black/5 rounded-lg transition-colors ml-auto text-slate-500 dark:text-slate-400"
         >
           <X className="w-4 h-4" />
         </button>

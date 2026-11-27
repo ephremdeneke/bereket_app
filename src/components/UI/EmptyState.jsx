@@ -9,12 +9,12 @@ export const EmptyState = ({
   icon: Icon = PackageOpen
 }) => {
   return (
-    <div className="flex flex-col items-center justify-center py-16 px-4 text-center border-2 border-dashed border-slate-200 rounded-2xl bg-slate-50/50">
-      <div className="p-4 bg-amber-50 text-amber-800 rounded-2xl mb-4 shadow-xs">
+    <div className="flex flex-col items-center justify-center py-16 px-4 text-center border-2 border-dashed border-slate-200 dark:border-slate-700 rounded-2xl bg-slate-50/50 dark:bg-slate-950/50">
+      <div className="p-4 bg-amber-50 dark:bg-amber-900/30 text-amber-800 rounded-2xl mb-4 shadow-xs">
         <Icon className="w-8 h-8" />
       </div>
-      <h4 className="text-base font-bold text-slate-800">{title}</h4>
-      <p className="mt-1 text-sm text-slate-500 max-w-sm">{description}</p>
+      <h4 className="text-base font-bold text-slate-800 dark:text-slate-200">{title}</h4>
+      <p className="mt-1 text-sm text-slate-500 dark:text-slate-400 max-w-sm">{description}</p>
       {actionLabel && onAction && (
         <button
           onClick={onAction}

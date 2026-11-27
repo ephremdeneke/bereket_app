@@ -26,20 +26,20 @@ export const Login = ({ onLogin }) => {
   };
 
   return (
-    <div className="min-h-screen bg-slate-50 flex items-center justify-center p-4">
-      <div className="w-full max-w-md bg-white rounded-2xl border border-slate-200 shadow-xl p-8">
+    <div className="min-h-screen bg-slate-50 dark:bg-slate-950 flex items-center justify-center p-4">
+      <div className="w-full max-w-md bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-700 shadow-xl p-8">
         <div className="flex items-center gap-3 mb-6">
           <div className="p-3 rounded-2xl bg-amber-800 text-white">
             <Sheet className="w-6 h-6" />
           </div>
           <div>
-            <h1 className="text-xl font-extrabold text-slate-900 tracking-tight">moshaga Cafe Manager</h1>
-            <p className="text-xs text-slate-500 mt-0.5">Sign in with your Apps Script user</p>
+            <h1 className="text-xl font-extrabold text-slate-900 dark:text-slate-100 tracking-tight">moshaga Cafe Manager</h1>
+            <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">Sign in with your Apps Script user</p>
           </div>
         </div>
 
         {error && (
-          <div className="mb-4 p-3 rounded-xl bg-rose-50 border border-rose-200 text-rose-900 text-xs flex items-start gap-2">
+          <div className="mb-4 p-3 rounded-xl bg-rose-50 dark:bg-rose-900/30 border border-rose-200 dark:border-rose-700/50 text-rose-900 dark:text-rose-200 text-xs flex items-start gap-2">
             <AlertCircle className="w-4 h-4 text-rose-600 flex-shrink-0 mt-0.5" />
             <span>{error}</span>
           </div>
@@ -47,24 +47,24 @@ export const Login = ({ onLogin }) => {
 
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
-            <label className="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-1">Username</label>
+            <label className="block text-xs font-bold uppercase tracking-wider text-slate-700 dark:text-slate-300 mb-1">Username</label>
             <input
               type="text"
               value={username}
               onChange={(e) => setUsername(e.target.value)}
-              className="w-full px-4 py-2.5 text-sm bg-slate-50 border border-slate-300 rounded-xl focus:ring-2 focus:ring-amber-500 focus:border-amber-500"
+              className="w-full px-4 py-2.5 text-sm bg-slate-50 dark:bg-slate-950 border border-slate-300 dark:border-slate-600 rounded-xl focus:ring-2 focus:ring-amber-500 focus:border-amber-500"
               autoComplete="username"
               required
             />
           </div>
 
           <div>
-            <label className="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-1">Password</label>
+            <label className="block text-xs font-bold uppercase tracking-wider text-slate-700 dark:text-slate-300 mb-1">Password</label>
             <input
               type="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              className="w-full px-4 py-2.5 text-sm bg-slate-50 border border-slate-300 rounded-xl focus:ring-2 focus:ring-amber-500 focus:border-amber-500"
+              className="w-full px-4 py-2.5 text-sm bg-slate-50 dark:bg-slate-950 border border-slate-300 dark:border-slate-600 rounded-xl focus:ring-2 focus:ring-amber-500 focus:border-amber-500"
               autoComplete="current-password"
               required
             />

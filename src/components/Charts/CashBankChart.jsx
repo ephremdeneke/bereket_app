@@ -12,7 +12,7 @@ export const CashBankChart = ({ cashAmount = 0, bankAmount = 0 }) => {
 
   if (total === 0) {
     return (
-      <div className="flex items-center justify-center h-64 text-sm text-slate-400">
+      <div className="flex items-center justify-center h-64 text-sm text-slate-400 dark:text-slate-300">
         No payment breakdown available.
       </div>
     );

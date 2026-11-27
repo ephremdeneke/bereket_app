@@ -82,14 +82,14 @@ export const DataManagement = ({ showToast }) => {
   return (
     <div className="space-y-6 max-w-5xl mx-auto">
       {/* Header Banner */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-white p-5 rounded-2xl border border-slate-200/80 shadow-xs">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-white dark:bg-slate-900 p-5 rounded-2xl border border-slate-200/80 dark:border-slate-700/80 shadow-xs">
         <div className="flex items-center gap-3">
-          <div className="p-3 bg-slate-100 text-slate-700 rounded-2xl">
+          <div className="p-3 bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 rounded-2xl">
             <Database className="w-6 h-6" />
           </div>
           <div>
-            <h2 className="text-xl font-extrabold text-slate-900 tracking-tight">Data Management</h2>
-            <p className="text-xs text-slate-500 font-medium">
+            <h2 className="text-xl font-extrabold text-slate-900 dark:text-slate-100 tracking-tight">Data Management</h2>
+            <p className="text-xs text-slate-500 dark:text-slate-400 font-medium">
               Inspect what is stored in your Google Sheet and wipe records when you start a new period.
             </p>
           </div>
@@ -97,7 +97,7 @@ export const DataManagement = ({ showToast }) => {
 
         <button
           onClick={loadSummary}
-          className="px-4 py-2.5 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-xl text-xs font-bold transition-colors flex items-center gap-2 shrink-0"
+          className="px-4 py-2.5 bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-300 rounded-xl text-xs font-bold transition-colors flex items-center gap-2 shrink-0"
         >
           <RefreshCw className="w-4 h-4" />
           <span>Refresh</span>
@@ -107,7 +107,7 @@ export const DataManagement = ({ showToast }) => {
       {/* Summary stat */}
       <div className="bg-gradient-to-r from-slate-900 to-slate-800 p-6 rounded-2xl text-white shadow-lg flex items-center justify-between gap-4">
         <div className="flex items-center gap-3">
-          <div className="p-3 bg-white/10 rounded-2xl border border-white/10">
+          <div className="p-3 bg-white/10 dark:bg-slate-900/10 rounded-2xl border border-white/10">
             <HardDriveDownload className="w-6 h-6 text-amber-400" />
           </div>
           <div>
@@ -121,22 +121,22 @@ export const DataManagement = ({ showToast }) => {
       </div>
 
       {/* Sheets list */}
-      <div className="bg-white rounded-2xl border border-slate-200/80 shadow-xs overflow-hidden">
-        <div className="px-5 py-4 border-b border-slate-100 flex items-center gap-2">
-          <Table2 className="w-4 h-4 text-slate-500" />
-          <h3 className="text-sm font-bold text-slate-900">Sheets in your database</h3>
+      <div className="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200/80 dark:border-slate-700/80 shadow-xs overflow-hidden">
+        <div className="px-5 py-4 border-b border-slate-100 dark:border-slate-800 flex items-center gap-2">
+          <Table2 className="w-4 h-4 text-slate-500 dark:text-slate-400" />
+          <h3 className="text-sm font-bold text-slate-900 dark:text-slate-100">Sheets in your database</h3>
         </div>
 
         <div className="divide-y divide-slate-100">
           {summary.map(entry => (
-            <div key={entry.sheet} className="px-5 py-4 flex items-center justify-between gap-4 hover:bg-slate-50/70 transition-colors">
+            <div key={entry.sheet} className="px-5 py-4 flex items-center justify-between gap-4 hover:bg-slate-50/70 dark:bg-slate-950/70 transition-colors">
               <div className="flex items-center gap-3 min-w-0">
-                <div className="p-2 bg-slate-100 text-slate-600 rounded-xl">
+                <div className="p-2 bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 rounded-xl">
                   <Table2 className="w-4 h-4" />
                 </div>
                 <div className="min-w-0">
-                  <p className="text-sm font-bold text-slate-900 truncate">{entry.sheet}</p>
-                  <p className="text-xs text-slate-500 truncate">
+                  <p className="text-sm font-bold text-slate-900 dark:text-slate-100 truncate">{entry.sheet}</p>
+                  <p className="text-xs text-slate-500 dark:text-slate-400 truncate">
                     {entry.exists ? (SHEET_LABELS[entry.sheet] || 'Managed sheet') : 'Sheet not created yet'}
                   </p>
                 </div>
@@ -145,8 +145,8 @@ export const DataManagement = ({ showToast }) => {
               <div className="flex items-center gap-3 shrink-0">
                 <span className={`text-xs font-bold px-2.5 py-1 rounded-lg border ${
                   entry.rows > 0
-                    ? 'bg-amber-50 text-amber-800 border-amber-200'
-                    : 'bg-slate-50 text-slate-500 border-slate-200'
+                    ? 'bg-amber-50 dark:bg-amber-900/30 text-amber-800 border-amber-200 dark:border-amber-700/50'
+                    : 'bg-slate-50 dark:bg-slate-950 text-slate-500 dark:text-slate-400 border-slate-200 dark:border-slate-700'
                 }`}>
                   {entry.rows} rows
                 </span>
@@ -154,7 +154,7 @@ export const DataManagement = ({ showToast }) => {
                 <button
                   onClick={() => setSheetTarget(entry)}
                   disabled={!entry.exists || entry.rows === 0}
-                  className="p-2 rounded-xl text-slate-400 hover:text-rose-700 hover:bg-rose-50 disabled:opacity-40 disabled:hover:bg-transparent transition-colors"
+                  className="p-2 rounded-xl text-slate-400 dark:text-slate-300 hover:text-rose-700 hover:bg-rose-50 dark:bg-rose-900/30 disabled:opacity-40 disabled:hover:bg-transparent transition-colors"
                   title={`Clear ${entry.sheet}`}
                 >
                   <Trash2 className="w-4 h-4" />
@@ -166,16 +166,16 @@ export const DataManagement = ({ showToast }) => {
       </div>
 
       {/* Danger zone */}
-      <div className="bg-white rounded-2xl border border-rose-200 shadow-xs overflow-hidden">
-        <div className="px-5 py-4 border-b border-rose-100 bg-rose-50/60 flex items-center gap-2">
+      <div className="bg-white dark:bg-slate-900 rounded-2xl border border-rose-200 dark:border-rose-700/50 shadow-xs overflow-hidden">
+        <div className="px-5 py-4 border-b border-rose-100 dark:border-rose-700/50 bg-rose-50/60 dark:bg-rose-900/30/60 flex items-center gap-2">
           <ShieldAlert className="w-4 h-4 text-rose-600" />
-          <h3 className="text-sm font-bold text-rose-900">Danger Zone</h3>
+          <h3 className="text-sm font-bold text-rose-900 dark:text-rose-200">Danger Zone</h3>
         </div>
 
         <div className="p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
           <div>
-            <h4 className="text-sm font-bold text-slate-900">Clear all data from sheet</h4>
-            <p className="text-xs text-slate-500 mt-1 leading-relaxed max-w-xl">
+            <h4 className="text-sm font-bold text-slate-900 dark:text-slate-100">Clear all data from sheet</h4>
+            <p className="text-xs text-slate-500 dark:text-slate-400 mt-1 leading-relaxed max-w-xl">
               Wipes every business record (products, sales, inventory, expenses, suppliers) from the Google Sheet.
               Use this when you want to start a fresh accounting period. Header rows are kept.
             </p>

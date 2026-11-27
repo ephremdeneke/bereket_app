@@ -11,7 +11,7 @@ export const LoadingSpinner = ({ label = 'Loading data...', size = 'md' }) => {
   return (
     <div className="flex flex-col items-center justify-center py-12 px-4">
       <Loader2 className={`${sizeClasses[size] || sizeClasses.md} text-amber-700 animate-spin mb-3`} />
-      <p className="text-sm font-medium text-slate-500">{label}</p>
+      <p className="text-sm font-medium text-slate-500 dark:text-slate-400">{label}</p>
     </div>
   );
 };

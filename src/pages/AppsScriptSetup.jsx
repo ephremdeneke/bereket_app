@@ -48,7 +48,7 @@ export const AppsScriptSetup = ({ showToast }) => {
         </div>
 
         <div className="p-3 bg-black/20 rounded-xl border border-white/10 text-xs flex flex-col sm:flex-row sm:items-center justify-between gap-2">
-          <div className="flex items-center gap-2 text-emerald-100 font-mono">
+          <div className="flex items-center gap-2 text-emerald-100 dark:text-emerald-200 font-mono">
             <span className="font-bold text-amber-400">Target Google Sheet:</span>
             <span className="truncate max-w-md">https://docs.google.com/spreadsheets/d/1QKC8zPRQS2UG5nijS4oZw_2hoHZKGWLeoghlUpzqXhk/edit</span>
           </div>
@@ -66,11 +66,11 @@ export const AppsScriptSetup = ({ showToast }) => {
       </div>
 
       {/* Connection Config Box */}
-      <div className="bg-white p-6 rounded-2xl border border-slate-200/80 shadow-xs space-y-4">
-        <h3 className="text-base font-bold text-slate-900">Step 3: Connect Deployed Web App URL</h3>
+      <div className="bg-white dark:bg-slate-900 p-6 rounded-2xl border border-slate-200/80 dark:border-slate-700/80 shadow-xs space-y-4">
+        <h3 className="text-base font-bold text-slate-900 dark:text-slate-100">Step 3: Connect Deployed Web App URL</h3>
         <form onSubmit={handleSaveUrl} className="space-y-3">
           <div>
-            <label className="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-1">
+            <label className="block text-xs font-bold uppercase tracking-wider text-slate-700 dark:text-slate-300 mb-1">
               Google Apps Script Web App URL
             </label>
             <input
@@ -78,15 +78,15 @@ export const AppsScriptSetup = ({ showToast }) => {
               placeholder="https://script.google.com/macros/s/AKfycb.../exec"
               value={url}
               onChange={(e) => setUrl(e.target.value)}
-              className="w-full px-4 py-2.5 text-sm bg-slate-50 border border-slate-300 rounded-xl focus:ring-2 focus:ring-amber-500 font-mono"
+              className="w-full px-4 py-2.5 text-sm bg-slate-50 dark:bg-slate-950 border border-slate-300 dark:border-slate-600 rounded-xl focus:ring-2 focus:ring-amber-500 font-mono"
             />
           </div>
 
           {testResult && (
             <div className={`p-3 rounded-xl border text-xs flex items-center gap-2 ${
               testResult.success 
-                ? 'bg-emerald-50 text-emerald-900 border-emerald-200' 
-                : 'bg-rose-50 text-rose-900 border-rose-200'
+                ? 'bg-emerald-50 dark:bg-emerald-900/30 text-emerald-900 dark:text-emerald-200 border-emerald-200 dark:border-emerald-700/50' 
+                : 'bg-rose-50 dark:bg-rose-900/30 text-rose-900 dark:text-rose-200 border-rose-200 dark:border-rose-700/50'
             }`}>
               {testResult.success ? <Check className="w-4 h-4 text-emerald-600 shrink-0" /> : <AlertCircle className="w-4 h-4 text-rose-600 shrink-0" />}
               <span>{testResult.message}</span>
@@ -105,7 +105,7 @@ export const AppsScriptSetup = ({ showToast }) => {
               type="button"
               onClick={handleTestConnection}
               disabled={testing || !url}
-              className="px-4 py-2.5 bg-slate-100 hover:bg-slate-200 text-slate-700 disabled:opacity-50 rounded-xl text-xs font-bold transition-colors flex items-center gap-1.5"
+              className="px-4 py-2.5 bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-300 disabled:opacity-50 rounded-xl text-xs font-bold transition-colors flex items-center gap-1.5"
             >
               {testing ? <RefreshCw className="w-3.5 h-3.5 animate-spin" /> : <Sheet className="w-3.5 h-3.5" />}
               <span>Test Ping</span>
@@ -115,49 +115,49 @@ export const AppsScriptSetup = ({ showToast }) => {
       </div>
 
       {/* Data management note */}
-      <div className="bg-white p-6 rounded-2xl border border-slate-200/80 shadow-xs space-y-3">
-        <h3 className="text-base font-bold text-slate-900">Step 4: Clear / Reset Your Data</h3>
-        <p className="text-xs text-slate-600 leading-relaxed">
-          The backend code below includes the <code className="bg-slate-200 px-1 py-0.5 rounded">clearAllData</code>,{' '}
-          <code className="bg-slate-200 px-1 py-0.5 rounded">clearSheetData</code> and{' '}
-          <code className="bg-slate-200 px-1 py-0.5 rounded">getDataSummary</code> actions. After copying the updated
+      <div className="bg-white dark:bg-slate-900 p-6 rounded-2xl border border-slate-200/80 dark:border-slate-700/80 shadow-xs space-y-3">
+        <h3 className="text-base font-bold text-slate-900 dark:text-slate-100">Step 4: Clear / Reset Your Data</h3>
+        <p className="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
+          The backend code below includes the <code className="bg-slate-200 dark:bg-slate-700 px-1 py-0.5 rounded">clearAllData</code>,{' '}
+          <code className="bg-slate-200 dark:bg-slate-700 px-1 py-0.5 rounded">clearSheetData</code> and{' '}
+          <code className="bg-slate-200 dark:bg-slate-700 px-1 py-0.5 rounded">getDataSummary</code> actions. After copying the updated
           code and redeploying the Web App, open the <strong>Data Management</strong> page from the sidebar to view row
           counts and wipe all records (or a single sheet) from your Google Sheet.
         </p>
       </div>
 
       {/* 3 Step Setup Walkthrough */}
-      <div className="bg-white p-6 rounded-2xl border border-slate-200/80 shadow-xs space-y-6">
-        <h3 className="text-lg font-bold text-slate-900">Setup Instructions (3 Simple Steps)</h3>
+      <div className="bg-white dark:bg-slate-900 p-6 rounded-2xl border border-slate-200/80 dark:border-slate-700/80 shadow-xs space-y-6">
+        <h3 className="text-lg font-bold text-slate-900 dark:text-slate-100">Setup Instructions (3 Simple Steps)</h3>
 
         <div className="space-y-4">
-          <div className="p-4 rounded-xl bg-slate-50 border border-slate-200 flex items-start gap-3">
+          <div className="p-4 rounded-xl bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-700 flex items-start gap-3">
             <span className="w-7 h-7 rounded-xl bg-amber-800 text-white font-extrabold text-sm flex items-center justify-center shrink-0">1</span>
             <div className="space-y-1">
-              <h4 className="text-sm font-bold text-slate-900">Open Apps Script in your Google Sheet</h4>
-              <p className="text-xs text-slate-600 leading-relaxed">
+              <h4 className="text-sm font-bold text-slate-900 dark:text-slate-100">Open Apps Script in your Google Sheet</h4>
+              <p className="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
                 Open your Google Sheet, click <strong>Extensions</strong> in the top menu bar, and select <strong>Apps Script</strong>.
               </p>
             </div>
           </div>
 
-          <div className="p-4 rounded-xl bg-slate-50 border border-slate-200 flex items-start gap-3">
+          <div className="p-4 rounded-xl bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-700 flex items-start gap-3">
             <span className="w-7 h-7 rounded-xl bg-amber-800 text-white font-extrabold text-sm flex items-center justify-center shrink-0">2</span>
             <div className="space-y-1">
-              <h4 className="text-sm font-bold text-slate-900">Paste Code.gs & Run Setup</h4>
-              <p className="text-xs text-slate-600 leading-relaxed">
-                Delete existing contents in <code className="bg-slate-200 px-1 py-0.5 rounded">Code.gs</code>, paste the backend code from below using the <strong>Copy Entire Backend Code</strong> button, and click <strong>Save (Ctrl+S)</strong>.
-                Do <strong>not</strong> paste the raw <code className="bg-slate-200 px-1 py-0.5 rounded">googleAppsScriptCode.js</code> file, and do not include any <code className="bg-slate-200 px-1 py-0.5 rounded">export const ...</code> line.
-                Then select <code className="bg-slate-200 px-1 py-0.5 rounded">setupDatabaseSheets</code> in the function dropdown and click <strong>Run</strong> once to create all database sheets, including <strong>Users</strong>. The default admin login is <code className="bg-slate-200 px-1 py-0.5 rounded">bereket</code> / <code className="bg-slate-200 px-1 py-0.5 rounded">beki@moshaga@123</code>.
+              <h4 className="text-sm font-bold text-slate-900 dark:text-slate-100">Paste Code.gs & Run Setup</h4>
+              <p className="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
+                Delete existing contents in <code className="bg-slate-200 dark:bg-slate-700 px-1 py-0.5 rounded">Code.gs</code>, paste the backend code from below using the <strong>Copy Entire Backend Code</strong> button, and click <strong>Save (Ctrl+S)</strong>.
+                Do <strong>not</strong> paste the raw <code className="bg-slate-200 dark:bg-slate-700 px-1 py-0.5 rounded">googleAppsScriptCode.js</code> file, and do not include any <code className="bg-slate-200 dark:bg-slate-700 px-1 py-0.5 rounded">export const ...</code> line.
+                Then select <code className="bg-slate-200 dark:bg-slate-700 px-1 py-0.5 rounded">setupDatabaseSheets</code> in the function dropdown and click <strong>Run</strong> once to create all database sheets, including <strong>Users</strong>. The default admin login is <code className="bg-slate-200 dark:bg-slate-700 px-1 py-0.5 rounded">bereket</code> / <code className="bg-slate-200 dark:bg-slate-700 px-1 py-0.5 rounded">beki@moshaga@123</code>.
               </p>
             </div>
           </div>
 
-          <div className="p-4 rounded-xl bg-slate-50 border border-slate-200 flex items-start gap-3">
+          <div className="p-4 rounded-xl bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-700 flex items-start gap-3">
             <span className="w-7 h-7 rounded-xl bg-amber-800 text-white font-extrabold text-sm flex items-center justify-center shrink-0">3</span>
             <div className="space-y-1">
-              <h4 className="text-sm font-bold text-slate-900">Deploy as Web App</h4>
-              <p className="text-xs text-slate-600 leading-relaxed">
+              <h4 className="text-sm font-bold text-slate-900 dark:text-slate-100">Deploy as Web App</h4>
+              <p className="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
                 Click <strong>Deploy &gt; New deployment</strong>. Choose type <strong>Web App</strong>. Set <i>Execute as</i> to <strong>Me</strong> and <i>Who has access</i> to <strong>Anyone</strong>. Click <strong>Deploy</strong> and copy the Web App URL into the box above.
               </p>
             </div>
@@ -182,7 +182,7 @@ export const AppsScriptSetup = ({ showToast }) => {
           </button>
         </div>
 
-        <div className="p-3 rounded-xl bg-rose-50 border border-rose-200 text-rose-900 text-xs font-semibold">
+        <div className="p-3 rounded-xl bg-rose-50 dark:bg-rose-900/30 border border-rose-200 dark:border-rose-700/50 text-rose-900 dark:text-rose-200 text-xs font-semibold">
           Important: paste only the backend Apps Script code. Do not include `export const GOOGLE_APPS_SCRIPT_CODE = \`` or the closing `` `; `` lines from the React source file.
         </div>
 

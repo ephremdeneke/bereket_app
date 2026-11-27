@@ -12,39 +12,39 @@ export const SummaryCard = ({
 }) => {
   const colorThemes = {
     amber: {
-      bg: 'bg-white',
-      border: 'border-slate-200/80',
-      iconBg: 'bg-amber-50 text-amber-800',
+      bg: 'bg-white dark:bg-slate-900',
+      border: 'border-slate-200/80 dark:border-slate-700/80',
+      iconBg: 'bg-amber-50 dark:bg-amber-900/30 text-amber-800',
       accent: 'text-amber-800'
     },
     emerald: {
-      bg: 'bg-white',
-      border: 'border-slate-200/80',
-      iconBg: 'bg-emerald-50 text-emerald-700',
+      bg: 'bg-white dark:bg-slate-900',
+      border: 'border-slate-200/80 dark:border-slate-700/80',
+      iconBg: 'bg-emerald-50 dark:bg-emerald-900/30 text-emerald-700',
       accent: 'text-emerald-700'
     },
     teal: {
-      bg: 'bg-white',
-      border: 'border-slate-200/80',
-      iconBg: 'bg-teal-50 text-teal-700',
+      bg: 'bg-white dark:bg-slate-900',
+      border: 'border-slate-200/80 dark:border-slate-700/80',
+      iconBg: 'bg-teal-50 dark:bg-teal-900/30 text-teal-700',
       accent: 'text-teal-700'
     },
     indigo: {
-      bg: 'bg-white',
-      border: 'border-slate-200/80',
+      bg: 'bg-white dark:bg-slate-900',
+      border: 'border-slate-200/80 dark:border-slate-700/80',
       iconBg: 'bg-indigo-50 text-indigo-700',
       accent: 'text-indigo-700'
     },
     rose: {
-      bg: 'bg-white',
-      border: 'border-slate-200/80',
-      iconBg: 'bg-rose-50 text-rose-700',
+      bg: 'bg-white dark:bg-slate-900',
+      border: 'border-slate-200/80 dark:border-slate-700/80',
+      iconBg: 'bg-rose-50 dark:bg-rose-900/30 text-rose-700',
       accent: 'text-rose-700'
     },
     sky: {
-      bg: 'bg-white',
-      border: 'border-slate-200/80',
-      iconBg: 'bg-sky-50 text-sky-700',
+      bg: 'bg-white dark:bg-slate-900',
+      border: 'border-slate-200/80 dark:border-slate-700/80',
+      iconBg: 'bg-sky-50 dark:bg-sky-900/30 text-sky-700',
       accent: 'text-sky-700'
     }
   };
@@ -59,7 +59,7 @@ export const SummaryCard = ({
       }`}
     >
       <div className="flex items-center justify-between">
-        <span className="text-xs font-semibold uppercase tracking-wider text-slate-500">{title}</span>
+        <span className="text-xs font-semibold uppercase tracking-wider text-slate-500 dark:text-slate-400">{title}</span>
         {Icon && (
           <div className={`p-2.5 rounded-xl ${theme.iconBg}`}>
             <Icon className="w-5 h-5" />
@@ -68,12 +68,12 @@ export const SummaryCard = ({
       </div>
 
       <div className="mt-3 flex items-baseline justify-between">
-        <h3 className="text-2xl font-extrabold text-slate-900 tracking-tight">{value}</h3>
+        <h3 className="text-2xl font-extrabold text-slate-900 dark:text-slate-100 tracking-tight">{value}</h3>
         {badge}
       </div>
 
       {subtitle && (
-        <p className="mt-1 text-xs text-slate-500 font-medium flex items-center gap-1">
+        <p className="mt-1 text-xs text-slate-500 dark:text-slate-400 font-medium flex items-center gap-1">
           {subtitle}
         </p>
       )}

@@ -1,9 +1,9 @@
 import React from 'react';
-import { Menu, Plus, Calendar, LogOut, Settings } from 'lucide-react';
+import { Menu, Plus, Calendar, LogOut, Settings, Sun, Moon } from 'lucide-react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { formatDate } from '../../utils/formatters';
 
-export const Header = ({ onOpenSidebar, isGoogleSheetsConnected, onOpenSettings, onOpenChangeCredentials, currentUser, onLogout }) => {
+export const Header = ({ onOpenSidebar, isGoogleSheetsConnected, onOpenSettings, onOpenChangeCredentials, currentUser, onLogout, darkMode, onToggleTheme }) => {
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -25,22 +25,22 @@ export const Header = ({ onOpenSidebar, isGoogleSheetsConnected, onOpenSettings,
   const todayStr = formatDate(new Date().toISOString());
 
   return (
-    <header className="sticky top-0 z-30 bg-white/95 backdrop-blur-md border-b border-slate-200/80 px-4 sm:px-6 py-3 shadow-xs">
+    <header className="sticky top-0 z-30 bg-white/95 dark:bg-slate-900/95 backdrop-blur-md border-b border-slate-200/80 dark:border-slate-700/80 px-4 sm:px-6 py-3 shadow-xs">
       <div className="flex items-center justify-between gap-4">
         {/* Left side: mobile toggle + page title */}
         <div className="flex items-center gap-3">
           <button
             onClick={onOpenSidebar}
-            className="lg:hidden p-2 rounded-xl text-slate-600 hover:bg-slate-100 transition-colors"
+            className="lg:hidden p-2 rounded-xl text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:bg-slate-800 transition-colors"
           >
             <Menu className="w-5 h-5" />
           </button>
           
           <div>
-            <h2 className="text-lg sm:text-xl font-extrabold text-slate-900 tracking-tight">
+            <h2 className="text-lg sm:text-xl font-extrabold text-slate-900 dark:text-slate-100 tracking-tight">
               {getPageTitle()}
             </h2>
-            <p className="text-xs font-medium text-slate-500 hidden sm:flex items-center gap-1.5 mt-0.5">
+            <p className="text-xs font-medium text-slate-500 dark:text-slate-400 hidden sm:flex items-center gap-1.5 mt-0.5">
               <Calendar className="w-3.5 h-3.5 text-amber-700" />
               <span>Today: {todayStr}</span>
             </p>
@@ -49,10 +49,19 @@ export const Header = ({ onOpenSidebar, isGoogleSheetsConnected, onOpenSettings,
 
         {/* Right side: Google Sheets indicator + Record Daily Sales shortcut button */}
         <div className="flex items-center gap-2 sm:gap-3">
+          {/* Theme toggle */}
+          <button
+            onClick={onToggleTheme}
+            className="p-2 rounded-xl text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:bg-slate-800 dark:hover:bg-slate-800 transition-colors"
+            title={darkMode ? 'Switch to light mode' : 'Switch to dark mode'}
+          >
+            {darkMode ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />}
+          </button>
+
           {/* Settings shortcut (connection status sign hidden) */}
           <button
             onClick={onOpenSettings}
-            className="p-2 rounded-xl text-slate-600 hover:bg-slate-100 transition-colors"
+            className="p-2 rounded-xl text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:bg-slate-800 transition-colors"
             title="Manage Google Sheets API connection"
           >
             <Settings className="w-5 h-5" />
@@ -61,18 +70,18 @@ export const Header = ({ onOpenSidebar, isGoogleSheetsConnected, onOpenSettings,
           <button
             type="button"
             onClick={onOpenChangeCredentials}
-            className="hidden sm:flex items-center gap-2 px-3 py-1.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-semibold transition-colors"
+            className="hidden sm:flex items-center gap-2 px-3 py-1.5 rounded-xl bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-300 text-xs font-semibold transition-colors"
             title="Change password / username"
           >
             <span className="max-w-24 truncate">{currentUser?.username || 'User'}</span>
-            {currentUser?.role && <span className="text-slate-400">•</span>}
+            {currentUser?.role && <span className="text-slate-400 dark:text-slate-300">•</span>}
             {currentUser?.role && <span>{currentUser.role}</span>}
           </button>
 
           <button
             type="button"
             onClick={onLogout}
-            className="p-2 rounded-xl text-slate-600 hover:bg-rose-50 hover:text-rose-700 transition-colors"
+            className="p-2 rounded-xl text-slate-600 dark:text-slate-400 hover:bg-rose-50 dark:bg-rose-900/30 hover:text-rose-700 transition-colors"
             title="Sign out"
           >
             <LogOut className="w-4 h-4" />

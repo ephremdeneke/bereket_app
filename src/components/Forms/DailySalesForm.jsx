@@ -103,9 +103,9 @@ export const DailySalesForm = ({ products = [], existingReport = null, onSave, i
   return (
     <form onSubmit={handleSubmit} className="space-y-6">
       {/* Date header */}
-      <div className="bg-white p-5 rounded-2xl border border-slate-200/80 shadow-xs flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+      <div className="bg-white dark:bg-slate-900 p-5 rounded-2xl border border-slate-200/80 dark:border-slate-700/80 shadow-xs flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
-          <label className="block text-xs font-bold uppercase tracking-wider text-slate-500 mb-1">
+          <label className="block text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400 mb-1">
             Report Date
           </label>
           <div className="relative max-w-xs">
@@ -114,15 +114,15 @@ export const DailySalesForm = ({ products = [], existingReport = null, onSave, i
               required
               value={date}
               onChange={(e) => setDate(e.target.value)}
-              className="w-full pl-10 pr-4 py-2.5 bg-slate-50 border border-slate-300 rounded-xl font-semibold text-slate-800 text-sm focus:ring-2 focus:ring-amber-500 focus:border-amber-500"
+              className="w-full pl-10 pr-4 py-2.5 bg-slate-50 dark:bg-slate-950 border border-slate-300 dark:border-slate-600 rounded-xl font-semibold text-slate-800 dark:text-slate-200 text-sm focus:ring-2 focus:ring-amber-500 focus:border-amber-500"
             />
-            <Calendar className="w-4 h-4 text-slate-500 absolute left-3 top-3.5" />
+            <Calendar className="w-4 h-4 text-slate-500 dark:text-slate-400 absolute left-3 top-3.5" />
           </div>
         </div>
 
         <div className="flex items-center gap-3">
           <div className="text-right">
-            <span className="text-xs font-semibold text-slate-500 block">Reconciliation Status</span>
+            <span className="text-xs font-semibold text-slate-500 dark:text-slate-400 block">Reconciliation Status</span>
             <div className="mt-0.5">
               <Badge variant={status === 'Matched' ? 'matched' : 'mismatch'} className="px-3 py-1 text-sm font-bold">
                 {status === 'Matched' ? (
@@ -137,20 +137,20 @@ export const DailySalesForm = ({ products = [], existingReport = null, onSave, i
       </div>
 
       {/* Drink Quantities Table */}
-      <div className="bg-white rounded-2xl border border-slate-200/80 shadow-xs overflow-hidden">
-        <div className="p-4 sm:p-5 border-b border-slate-100 flex items-center justify-between">
+      <div className="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200/80 dark:border-slate-700/80 shadow-xs overflow-hidden">
+        <div className="p-4 sm:p-5 border-b border-slate-100 dark:border-slate-800 flex items-center justify-between">
           <div>
-            <h3 className="text-base font-bold text-slate-900">Drink Daily Quantities</h3>
-            <p className="text-xs text-slate-500">Enter total quantities sold for each beverage today</p>
+            <h3 className="text-base font-bold text-slate-900 dark:text-slate-100">Drink Daily Quantities</h3>
+            <p className="text-xs text-slate-500 dark:text-slate-400">Enter total quantities sold for each beverage today</p>
           </div>
-          <span className="text-xs font-bold bg-amber-50 text-amber-900 px-3 py-1 rounded-full border border-amber-200">
+          <span className="text-xs font-bold bg-amber-50 dark:bg-amber-900/30 text-amber-900 dark:text-amber-200 px-3 py-1 rounded-full border border-amber-200 dark:border-amber-700/50">
             {activeProducts.length} Configured Drinks
           </span>
         </div>
 
         <div className="overflow-x-auto">
           <table className="w-full text-left text-sm">
-            <thead className="bg-slate-50 text-slate-600 font-semibold border-b border-slate-100 text-xs uppercase tracking-wider">
+            <thead className="bg-slate-50 dark:bg-slate-950 text-slate-600 dark:text-slate-400 font-semibold border-b border-slate-100 dark:border-slate-800 text-xs uppercase tracking-wider">
               <tr>
                 <th className="py-3.5 px-4 sm:px-6">Product Drink</th>
                 <th className="py-3.5 px-4 sm:px-6 text-right">Selling Price</th>
@@ -160,11 +160,11 @@ export const DailySalesForm = ({ products = [], existingReport = null, onSave, i
             </thead>
             <tbody className="divide-y divide-slate-100">
               {calculatedItems.map((item) => (
-                <tr key={item.productId} className="hover:bg-slate-50/80 transition-colors">
-                  <td className="py-4 px-4 sm:px-6 font-bold text-slate-900">
+                <tr key={item.productId} className="hover:bg-slate-50/80 dark:bg-slate-950/80 transition-colors">
+                  <td className="py-4 px-4 sm:px-6 font-bold text-slate-900 dark:text-slate-100">
                     {item.productName}
                   </td>
-                  <td className="py-4 px-4 sm:px-6 text-right font-medium text-slate-600">
+                  <td className="py-4 px-4 sm:px-6 text-right font-medium text-slate-600 dark:text-slate-400">
                     {formatCurrency(item.unitPrice)}
                   </td>
                   <td className="py-4 px-4 sm:px-6">
@@ -172,7 +172,7 @@ export const DailySalesForm = ({ products = [], existingReport = null, onSave, i
                       <button
                         type="button"
                         onClick={() => handleDecrement(item.productId)}
-                        className="w-8 h-8 rounded-lg border border-slate-300 bg-white hover:bg-slate-100 flex items-center justify-center text-slate-700 font-bold transition-colors shadow-2xs"
+                        className="w-8 h-8 rounded-lg border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-900 hover:bg-slate-100 dark:bg-slate-800 flex items-center justify-center text-slate-700 dark:text-slate-300 font-bold transition-colors shadow-2xs"
                       >
                         <Minus className="w-3.5 h-3.5" />
                       </button>
@@ -182,30 +182,30 @@ export const DailySalesForm = ({ products = [], existingReport = null, onSave, i
                         min="0"
                         value={quantities[item.productId] ?? 0}
                         onChange={(e) => handleQuantityChange(item.productId, e.target.value)}
-                        className="w-16 sm:w-20 text-center py-1.5 font-bold text-base bg-slate-50 border border-slate-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500"
+                        className="w-16 sm:w-20 text-center py-1.5 font-bold text-base bg-slate-50 dark:bg-slate-950 border border-slate-300 dark:border-slate-600 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500"
                       />
 
                       <button
                         type="button"
                         onClick={() => handleIncrement(item.productId)}
-                        className="w-8 h-8 rounded-lg border border-slate-300 bg-white hover:bg-slate-100 flex items-center justify-center text-slate-700 font-bold transition-colors shadow-2xs"
+                        className="w-8 h-8 rounded-lg border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-900 hover:bg-slate-100 dark:bg-slate-800 flex items-center justify-center text-slate-700 dark:text-slate-300 font-bold transition-colors shadow-2xs"
                       >
                         <Plus className="w-3.5 h-3.5" />
                       </button>
                     </div>
                   </td>
-                  <td className="py-4 px-4 sm:px-6 text-right font-extrabold text-amber-900 text-base">
+                  <td className="py-4 px-4 sm:px-6 text-right font-extrabold text-amber-900 dark:text-amber-200 text-base">
                     {formatCurrency(item.calculatedAmount)}
                   </td>
                 </tr>
               ))}
             </tbody>
-            <tfoot className="bg-amber-50/60 border-t-2 border-amber-200">
+            <tfoot className="bg-amber-50/60 dark:bg-amber-900/30/60 border-t-2 border-amber-200 dark:border-amber-700/50">
               <tr>
-                <td colSpan="3" className="py-4 px-4 sm:px-6 font-bold text-slate-800 text-base">
+                <td colSpan="3" className="py-4 px-4 sm:px-6 font-bold text-slate-800 dark:text-slate-200 text-base">
                   Calculated Daily Sales Total
                 </td>
-                <td className="py-4 px-4 sm:px-6 text-right font-extrabold text-amber-900 text-lg">
+                <td className="py-4 px-4 sm:px-6 text-right font-extrabold text-amber-900 dark:text-amber-200 text-lg">
                   {formatCurrency(totalCalculatedSales)}
                 </td>
               </tr>
@@ -215,20 +215,20 @@ export const DailySalesForm = ({ products = [], existingReport = null, onSave, i
       </div>
 
       {/* Cash / Bank Reconciliation Card */}
-      <div className="bg-white p-5 sm:p-6 rounded-2xl border border-slate-200/80 shadow-xs space-y-6">
+      <div className="bg-white dark:bg-slate-900 p-5 sm:p-6 rounded-2xl border border-slate-200/80 dark:border-slate-700/80 shadow-xs space-y-6">
         <div>
-          <h3 className="text-base font-bold text-slate-900 flex items-center gap-2">
+          <h3 className="text-base font-bold text-slate-900 dark:text-slate-100 flex items-center gap-2">
             <DollarSign className="w-5 h-5 text-amber-700" />
             Cash & Bank Payment Reconciliation
           </h3>
-          <p className="text-xs text-slate-500 mt-0.5">
+          <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">
             Enter the actual amounts collected in Cash register and Bank transfer accounts today.
           </p>
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div>
-            <label className="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-1.5">
+            <label className="block text-xs font-bold uppercase tracking-wider text-slate-700 dark:text-slate-300 mb-1.5">
               Cash Sales (ETB)
             </label>
             <input
@@ -238,12 +238,12 @@ export const DailySalesForm = ({ products = [], existingReport = null, onSave, i
               placeholder="e.g. 3450"
               value={cashSales}
               onChange={(e) => setCashSales(e.target.value)}
-              className="w-full px-4 py-3 text-base font-bold bg-slate-50 border border-slate-300 rounded-xl focus:ring-2 focus:ring-amber-500 focus:border-amber-500"
+              className="w-full px-4 py-3 text-base font-bold bg-slate-50 dark:bg-slate-950 border border-slate-300 dark:border-slate-600 rounded-xl focus:ring-2 focus:ring-amber-500 focus:border-amber-500"
             />
           </div>
 
           <div>
-            <label className="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-1.5">
+            <label className="block text-xs font-bold uppercase tracking-wider text-slate-700 dark:text-slate-300 mb-1.5">
               Bank Sales (Telebirr / CBE / Bank) (ETB)
             </label>
             <input
@@ -253,28 +253,28 @@ export const DailySalesForm = ({ products = [], existingReport = null, onSave, i
               placeholder="e.g. 2500"
               value={bankSales}
               onChange={(e) => setBankSales(e.target.value)}
-              className="w-full px-4 py-3 text-base font-bold bg-slate-50 border border-slate-300 rounded-xl focus:ring-2 focus:ring-amber-500 focus:border-amber-500"
+              className="w-full px-4 py-3 text-base font-bold bg-slate-50 dark:bg-slate-950 border border-slate-300 dark:border-slate-600 rounded-xl focus:ring-2 focus:ring-amber-500 focus:border-amber-500"
             />
           </div>
         </div>
 
         {/* Reconciliation Summary Box */}
         <div className={`p-4 rounded-xl border ${
-          status === 'Matched' ? 'bg-emerald-50/70 border-emerald-200' : 'bg-rose-50/70 border-rose-200'
+          status === 'Matched' ? 'bg-emerald-50/70 dark:bg-emerald-900/30/70 border-emerald-200 dark:border-emerald-700/50' : 'bg-rose-50/70 dark:bg-rose-900/30/70 border-rose-200 dark:border-rose-700/50'
         }`}>
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 text-center sm:text-left">
             <div>
-              <span className="text-xs font-semibold text-slate-500 block">Calculated Product Sales</span>
-              <span className="text-base font-bold text-slate-900">{formatCurrency(totalCalculatedSales)}</span>
+              <span className="text-xs font-semibold text-slate-500 dark:text-slate-400 block">Calculated Product Sales</span>
+              <span className="text-base font-bold text-slate-900 dark:text-slate-100">{formatCurrency(totalCalculatedSales)}</span>
             </div>
 
             <div>
-              <span className="text-xs font-semibold text-slate-500 block">Recorded Total (Cash + Bank)</span>
-              <span className="text-base font-bold text-slate-900">{formatCurrency(recordedTotal)}</span>
+              <span className="text-xs font-semibold text-slate-500 dark:text-slate-400 block">Recorded Total (Cash + Bank)</span>
+              <span className="text-base font-bold text-slate-900 dark:text-slate-100">{formatCurrency(recordedTotal)}</span>
             </div>
 
             <div>
-              <span className="text-xs font-semibold text-slate-500 block">Discrepancy / Difference</span>
+              <span className="text-xs font-semibold text-slate-500 dark:text-slate-400 block">Discrepancy / Difference</span>
               <span className={`text-base font-extrabold ${difference === 0 ? 'text-emerald-700' : 'text-rose-700'}`}>
                 {formatCurrency(difference)}
               </span>
@@ -282,7 +282,7 @@ export const DailySalesForm = ({ products = [], existingReport = null, onSave, i
           </div>
 
           {status === 'Mismatch' && (
-            <div className="mt-3 pt-3 border-t border-rose-200/60 flex items-center gap-2 text-xs font-semibold text-rose-800">
+            <div className="mt-3 pt-3 border-t border-rose-200/60 dark:border-rose-700/50/60 flex items-center gap-2 text-xs font-semibold text-rose-800">
               <AlertTriangle className="w-4 h-4 flex-shrink-0" />
               <span>Warning: Recorded Cash + Bank total does not equal calculated drink sales by {formatCurrency(Math.abs(difference))}.</span>
             </div>
@@ -291,8 +291,8 @@ export const DailySalesForm = ({ products = [], existingReport = null, onSave, i
 
         {/* Notes */}
         <div>
-          <label className="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-1.5 flex items-center gap-1.5">
-            <FileText className="w-4 h-4 text-slate-500" />
+          <label className="block text-xs font-bold uppercase tracking-wider text-slate-700 dark:text-slate-300 mb-1.5 flex items-center gap-1.5">
+            <FileText className="w-4 h-4 text-slate-500 dark:text-slate-400" />
             Shift Notes / Comments
           </label>
           <textarea
@@ -300,7 +300,7 @@ export const DailySalesForm = ({ products = [], existingReport = null, onSave, i
             placeholder="Add any notes regarding discounts, shift shortages, or general observation..."
             value={notes}
             onChange={(e) => setNotes(e.target.value)}
-            className="w-full px-4 py-2.5 text-sm bg-slate-50 border border-slate-300 rounded-xl focus:ring-2 focus:ring-amber-500 focus:border-amber-500"
+            className="w-full px-4 py-2.5 text-sm bg-slate-50 dark:bg-slate-950 border border-slate-300 dark:border-slate-600 rounded-xl focus:ring-2 focus:ring-amber-500 focus:border-amber-500"
           />
         </div>
       </div>

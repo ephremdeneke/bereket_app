@@ -155,14 +155,14 @@ export const Dashboard = ({ showToast }) => {
   return (
     <div className="space-y-6">
       {/* Timeframe selector header */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-white p-4 sm:p-5 rounded-2xl border border-slate-200/80 shadow-xs">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-white dark:bg-slate-900 p-4 sm:p-5 rounded-2xl border border-slate-200/80 dark:border-slate-700/80 shadow-xs">
         <div>
-          <h2 className="text-xl font-extrabold text-slate-900 tracking-tight">Business Dashboard</h2>
-          <p className="text-xs text-slate-500 font-medium">Real-time daily financial totals and inventory metrics</p>
+          <h2 className="text-xl font-extrabold text-slate-900 dark:text-slate-100 tracking-tight">Business Dashboard</h2>
+          <p className="text-xs text-slate-500 dark:text-slate-400 font-medium">Real-time daily financial totals and inventory metrics</p>
         </div>
 
         {/* Timeframe switch */}
-        <div className="flex items-center gap-1.5 bg-slate-100 p-1 rounded-xl border border-slate-200 text-xs font-semibold">
+        <div className="flex items-center gap-1.5 bg-slate-100 dark:bg-slate-800 p-1 rounded-xl border border-slate-200 dark:border-slate-700 text-xs font-semibold">
           {['Today', 'This Week', 'This Month'].map((tf) => (
             <button
               key={tf}
@@ -170,7 +170,7 @@ export const Dashboard = ({ showToast }) => {
               className={`px-3.5 py-1.5 rounded-lg transition-all ${
                 timeframe === tf
                   ? 'bg-amber-800 text-white shadow-xs'
-                  : 'text-slate-600 hover:text-slate-900'
+                  : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:text-slate-100'
               }`}
             >
               {tf}
@@ -182,13 +182,13 @@ export const Dashboard = ({ showToast }) => {
       {/* Alert Banners */}
       {/* 1. Unreconciled Sales Alert */}
       {todayReport && todayReport.reconciliationStatus === 'Mismatch' && (
-        <div className="p-4 rounded-2xl bg-rose-50 border border-rose-200 flex items-center justify-between gap-4">
+        <div className="p-4 rounded-2xl bg-rose-50 dark:bg-rose-900/30 border border-rose-200 dark:border-rose-700/50 flex items-center justify-between gap-4">
           <div className="flex items-center gap-3">
-            <div className="p-2 bg-rose-100 text-rose-700 rounded-xl">
+            <div className="p-2 bg-rose-100 dark:bg-rose-900/40 text-rose-700 rounded-xl">
               <ShieldAlert className="w-5 h-5" />
             </div>
             <div>
-              <p className="text-sm font-bold text-rose-900">Today's Daily Sales has a Reconciliation Mismatch!</p>
+              <p className="text-sm font-bold text-rose-900 dark:text-rose-200">Today's Daily Sales has a Reconciliation Mismatch!</p>
               <p className="text-xs text-rose-700">Recorded total differs from calculated drink sales by {formatCurrency(todayReport.difference)}.</p>
             </div>
           </div>
@@ -203,13 +203,13 @@ export const Dashboard = ({ showToast }) => {
 
       {/* 2. Today Sales missing notice */}
       {!todayReport && (
-        <div className="p-4 rounded-2xl bg-amber-50 border border-amber-200 flex items-center justify-between gap-4">
+        <div className="p-4 rounded-2xl bg-amber-50 dark:bg-amber-900/30 border border-amber-200 dark:border-amber-700/50 flex items-center justify-between gap-4">
           <div className="flex items-center gap-3">
-            <div className="p-2 bg-amber-100 text-amber-800 rounded-xl">
+            <div className="p-2 bg-amber-100 dark:bg-amber-900/40 text-amber-800 rounded-xl">
               <Calendar className="w-5 h-5" />
             </div>
             <div>
-              <p className="text-sm font-bold text-amber-900">Today's daily sales haven't been saved yet.</p>
+              <p className="text-sm font-bold text-amber-900 dark:text-amber-200">Today's daily sales haven't been saved yet.</p>
               <p className="text-xs text-amber-800">Record today's drink quantities to update daily revenues and cash drops.</p>
             </div>
           </div>
@@ -292,46 +292,46 @@ export const Dashboard = ({ showToast }) => {
       {/* Dashboard Visual Charts */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         {/* 1. Sales Trend */}
-        <div className="bg-white p-5 rounded-2xl border border-slate-200/80 shadow-xs space-y-4">
+        <div className="bg-white dark:bg-slate-900 p-5 rounded-2xl border border-slate-200/80 dark:border-slate-700/80 shadow-xs space-y-4">
           <div className="flex items-center justify-between">
             <div>
-              <h3 className="text-base font-bold text-slate-900">Sales Trend</h3>
-              <p className="text-xs text-slate-500">Daily sales revenue over recent periods</p>
+              <h3 className="text-base font-bold text-slate-900 dark:text-slate-100">Sales Trend</h3>
+              <p className="text-xs text-slate-500 dark:text-slate-400">Daily sales revenue over recent periods</p>
             </div>
-            <span className="text-xs font-semibold text-amber-800 bg-amber-50 px-2.5 py-1 rounded-lg">ETB</span>
+            <span className="text-xs font-semibold text-amber-800 bg-amber-50 dark:bg-amber-900/30 px-2.5 py-1 rounded-lg">ETB</span>
           </div>
           <SalesTrendChart data={sortedSalesForChart} />
         </div>
 
         {/* 2. Expense Trend */}
-        <div className="bg-white p-5 rounded-2xl border border-slate-200/80 shadow-xs space-y-4">
+        <div className="bg-white dark:bg-slate-900 p-5 rounded-2xl border border-slate-200/80 dark:border-slate-700/80 shadow-xs space-y-4">
           <div className="flex items-center justify-between">
             <div>
-              <h3 className="text-base font-bold text-slate-900">Expense Trend</h3>
-              <p className="text-xs text-slate-500">Operating expense breakdown by day</p>
+              <h3 className="text-base font-bold text-slate-900 dark:text-slate-100">Expense Trend</h3>
+              <p className="text-xs text-slate-500 dark:text-slate-400">Operating expense breakdown by day</p>
             </div>
-            <span className="text-xs font-semibold text-rose-700 bg-rose-50 px-2.5 py-1 rounded-lg">ETB</span>
+            <span className="text-xs font-semibold text-rose-700 bg-rose-50 dark:bg-rose-900/30 px-2.5 py-1 rounded-lg">ETB</span>
           </div>
           <ExpenseTrendChart data={sortedExpensesForChart} />
         </div>
 
         {/* 3. Cash vs Bank Breakdown */}
-        <div className="bg-white p-5 rounded-2xl border border-slate-200/80 shadow-xs space-y-4">
+        <div className="bg-white dark:bg-slate-900 p-5 rounded-2xl border border-slate-200/80 dark:border-slate-700/80 shadow-xs space-y-4">
           <div className="flex items-center justify-between">
             <div>
-              <h3 className="text-base font-bold text-slate-900">Cash vs Bank Payments</h3>
-              <p className="text-xs text-slate-500">Payment channel distribution ({timeframe})</p>
+              <h3 className="text-base font-bold text-slate-900 dark:text-slate-100">Cash vs Bank Payments</h3>
+              <p className="text-xs text-slate-500 dark:text-slate-400">Payment channel distribution ({timeframe})</p>
             </div>
           </div>
           <CashBankChart cashAmount={totalCashVal} bankAmount={totalBankVal} />
         </div>
 
         {/* 4. Sales By Drink */}
-        <div className="bg-white p-5 rounded-2xl border border-slate-200/80 shadow-xs space-y-4">
+        <div className="bg-white dark:bg-slate-900 p-5 rounded-2xl border border-slate-200/80 dark:border-slate-700/80 shadow-xs space-y-4">
           <div className="flex items-center justify-between">
             <div>
-              <h3 className="text-base font-bold text-slate-900">Sales by Drink (Volume)</h3>
-              <p className="text-xs text-slate-500">Drink quantities sold during {timeframe}</p>
+              <h3 className="text-base font-bold text-slate-900 dark:text-slate-100">Sales by Drink (Volume)</h3>
+              <p className="text-xs text-slate-500 dark:text-slate-400">Drink quantities sold during {timeframe}</p>
             </div>
           </div>
           <SalesByDrinkChart data={salesByDrinkChartData} />
@@ -340,8 +340,8 @@ export const Dashboard = ({ showToast }) => {
 
       {/* Low Stock Highlight Table */}
       {lowStockItems.length > 0 && (
-        <div className="bg-white rounded-2xl border border-amber-200 shadow-xs overflow-hidden">
-          <div className="p-4 sm:p-5 bg-amber-50/60 border-b border-amber-100 flex items-center justify-between">
+        <div className="bg-white dark:bg-slate-900 rounded-2xl border border-amber-200 dark:border-amber-700/50 shadow-xs overflow-hidden">
+          <div className="p-4 sm:p-5 bg-amber-50/60 dark:bg-amber-900/30/60 border-b border-amber-100 dark:border-amber-700/50 flex items-center justify-between">
             <div className="flex items-center gap-2">
               <AlertTriangle className="w-5 h-5 text-amber-700" />
               <div>
@@ -351,7 +351,7 @@ export const Dashboard = ({ showToast }) => {
             </div>
             <button
               onClick={() => navigate('/inventory')}
-              className="text-xs font-bold text-amber-900 hover:text-amber-950 underline flex items-center gap-1"
+              className="text-xs font-bold text-amber-900 dark:text-amber-200 hover:text-amber-950 underline flex items-center gap-1"
             >
               Manage Inventory <ArrowRight className="w-3.5 h-3.5" />
             </button>
@@ -359,7 +359,7 @@ export const Dashboard = ({ showToast }) => {
 
           <div className="overflow-x-auto">
             <table className="w-full text-left text-sm">
-              <thead className="bg-slate-50 text-slate-600 font-semibold border-b border-slate-100 text-xs uppercase">
+              <thead className="bg-slate-50 dark:bg-slate-950 text-slate-600 dark:text-slate-400 font-semibold border-b border-slate-100 dark:border-slate-800 text-xs uppercase">
                 <tr>
                   <th className="py-3 px-5">Ingredient / Item</th>
                   <th className="py-3 px-5">Category</th>
@@ -371,12 +371,12 @@ export const Dashboard = ({ showToast }) => {
               </thead>
               <tbody className="divide-y divide-slate-100">
                 {lowStockItems.map(item => (
-                  <tr key={item.id} className="hover:bg-amber-50/30">
-                    <td className="py-3 px-5 font-bold text-slate-900">{item.name}</td>
-                    <td className="py-3 px-5 text-slate-600 text-xs">{item.category}</td>
+                  <tr key={item.id} className="hover:bg-amber-50/30 dark:bg-amber-900/30/30">
+                    <td className="py-3 px-5 font-bold text-slate-900 dark:text-slate-100">{item.name}</td>
+                    <td className="py-3 px-5 text-slate-600 dark:text-slate-400 text-xs">{item.category}</td>
                     <td className="py-3 px-5 text-center font-bold text-rose-700">{item.currentQuantity} {item.unit}</td>
-                    <td className="py-3 px-5 text-center text-slate-600">{item.minimumStock} {item.unit}</td>
-                    <td className="py-3 px-5 text-xs text-slate-600">{item.supplierName || 'General'}</td>
+                    <td className="py-3 px-5 text-center text-slate-600 dark:text-slate-400">{item.minimumStock} {item.unit}</td>
+                    <td className="py-3 px-5 text-xs text-slate-600 dark:text-slate-400">{item.supplierName || 'General'}</td>
                     <td className="py-3 px-5 text-right">
                       <Badge variant="lowStock">Low Stock</Badge>
                     </td>

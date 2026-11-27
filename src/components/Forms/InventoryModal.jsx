@@ -50,24 +50,24 @@ export const InventoryModal = ({ isOpen, item, suppliers = [], onSave, onClose }
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/50 backdrop-blur-xs animate-fadeIn">
-      <div className="bg-white rounded-2xl max-w-lg w-full p-6 shadow-2xl border border-slate-100">
-        <div className="flex items-center justify-between pb-4 border-b border-slate-100">
+      <div className="bg-white dark:bg-slate-900 rounded-2xl max-w-lg w-full p-6 shadow-2xl border border-slate-100 dark:border-slate-800">
+        <div className="flex items-center justify-between pb-4 border-b border-slate-100 dark:border-slate-800">
           <div className="flex items-center gap-3">
-            <div className="p-2.5 bg-amber-50 text-amber-800 rounded-xl">
+            <div className="p-2.5 bg-amber-50 dark:bg-amber-900/30 text-amber-800 rounded-xl">
               <Boxes className="w-5 h-5" />
             </div>
-            <h3 className="text-lg font-bold text-slate-900">
+            <h3 className="text-lg font-bold text-slate-900 dark:text-slate-100">
               {item ? 'Edit Inventory Item' : 'Add Inventory Ingredient/Supply'}
             </h3>
           </div>
-          <button onClick={onClose} className="text-slate-400 hover:text-slate-600 p-1 rounded-lg">
+          <button onClick={onClose} className="text-slate-400 dark:text-slate-300 hover:text-slate-600 dark:text-slate-400 p-1 rounded-lg">
             <X className="w-5 h-5" />
           </button>
         </div>
 
         <form onSubmit={handleSubmit} className="mt-5 space-y-4">
           <div>
-            <label className="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-1">
+            <label className="block text-xs font-bold uppercase tracking-wider text-slate-700 dark:text-slate-300 mb-1">
               Item Name
             </label>
             <input
@@ -76,19 +76,19 @@ export const InventoryModal = ({ isOpen, item, suppliers = [], onSave, onClose }
               placeholder="e.g. Roasted Sidama Coffee Beans"
               value={name}
               onChange={(e) => setName(e.target.value)}
-              className="w-full px-4 py-2.5 text-sm bg-slate-50 border border-slate-300 rounded-xl focus:ring-2 focus:ring-amber-500 focus:border-amber-500"
+              className="w-full px-4 py-2.5 text-sm bg-slate-50 dark:bg-slate-950 border border-slate-300 dark:border-slate-600 rounded-xl focus:ring-2 focus:ring-amber-500 focus:border-amber-500"
             />
           </div>
 
           <div className="grid grid-cols-2 gap-3">
             <div>
-              <label className="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-1">
+              <label className="block text-xs font-bold uppercase tracking-wider text-slate-700 dark:text-slate-300 mb-1">
                 Category
               </label>
               <select
                 value={category}
                 onChange={(e) => setCategory(e.target.value)}
-                className="w-full px-3 py-2.5 text-sm bg-slate-50 border border-slate-300 rounded-xl focus:ring-2 focus:ring-amber-500 focus:border-amber-500"
+                className="w-full px-3 py-2.5 text-sm bg-slate-50 dark:bg-slate-950 border border-slate-300 dark:border-slate-600 rounded-xl focus:ring-2 focus:ring-amber-500 focus:border-amber-500"
               >
                 <option value="Coffee Beans">Coffee Beans</option>
                 <option value="Milk & Dairy">Milk & Dairy</option>
@@ -101,7 +101,7 @@ export const InventoryModal = ({ isOpen, item, suppliers = [], onSave, onClose }
             </div>
 
             <div>
-              <label className="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-1">
+              <label className="block text-xs font-bold uppercase tracking-wider text-slate-700 dark:text-slate-300 mb-1">
                 Measurement Unit
               </label>
               <input
@@ -110,14 +110,14 @@ export const InventoryModal = ({ isOpen, item, suppliers = [], onSave, onClose }
                 placeholder="e.g. kg, L, pcs, bottles"
                 value={unit}
                 onChange={(e) => setUnit(e.target.value)}
-                className="w-full px-3 py-2.5 text-sm bg-slate-50 border border-slate-300 rounded-xl focus:ring-2 focus:ring-amber-500 focus:border-amber-500"
+                className="w-full px-3 py-2.5 text-sm bg-slate-50 dark:bg-slate-950 border border-slate-300 dark:border-slate-600 rounded-xl focus:ring-2 focus:ring-amber-500 focus:border-amber-500"
               />
             </div>
           </div>
 
           <div className="grid grid-cols-2 gap-3">
             <div>
-              <label className="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-1">
+              <label className="block text-xs font-bold uppercase tracking-wider text-slate-700 dark:text-slate-300 mb-1">
                 Current Stock Qty
               </label>
               <input
@@ -127,12 +127,12 @@ export const InventoryModal = ({ isOpen, item, suppliers = [], onSave, onClose }
                 required
                 value={currentQuantity}
                 onChange={(e) => setCurrentQuantity(e.target.value)}
-                className="w-full px-3 py-2.5 text-sm font-bold bg-slate-50 border border-slate-300 rounded-xl focus:ring-2 focus:ring-amber-500 focus:border-amber-500"
+                className="w-full px-3 py-2.5 text-sm font-bold bg-slate-50 dark:bg-slate-950 border border-slate-300 dark:border-slate-600 rounded-xl focus:ring-2 focus:ring-amber-500 focus:border-amber-500"
               />
             </div>
 
             <div>
-              <label className="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-1">
+              <label className="block text-xs font-bold uppercase tracking-wider text-slate-700 dark:text-slate-300 mb-1">
                 Minimum Alert Stock
               </label>
               <input
@@ -142,14 +142,14 @@ export const InventoryModal = ({ isOpen, item, suppliers = [], onSave, onClose }
                 required
                 value={minimumStock}
                 onChange={(e) => setMinimumStock(e.target.value)}
-                className="w-full px-3 py-2.5 text-sm font-bold bg-slate-50 border border-slate-300 rounded-xl focus:ring-2 focus:ring-amber-500 focus:border-amber-500"
+                className="w-full px-3 py-2.5 text-sm font-bold bg-slate-50 dark:bg-slate-950 border border-slate-300 dark:border-slate-600 rounded-xl focus:ring-2 focus:ring-amber-500 focus:border-amber-500"
               />
             </div>
           </div>
 
           <div className="grid grid-cols-2 gap-3">
             <div>
-              <label className="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-1">
+              <label className="block text-xs font-bold uppercase tracking-wider text-slate-700 dark:text-slate-300 mb-1">
                 Unit Purchase Cost (ETB)
               </label>
               <input
@@ -159,18 +159,18 @@ export const InventoryModal = ({ isOpen, item, suppliers = [], onSave, onClose }
                 required
                 value={purchaseCost}
                 onChange={(e) => setPurchaseCost(e.target.value)}
-                className="w-full px-3 py-2.5 text-sm font-bold bg-slate-50 border border-slate-300 rounded-xl focus:ring-2 focus:ring-amber-500 focus:border-amber-500"
+                className="w-full px-3 py-2.5 text-sm font-bold bg-slate-50 dark:bg-slate-950 border border-slate-300 dark:border-slate-600 rounded-xl focus:ring-2 focus:ring-amber-500 focus:border-amber-500"
               />
             </div>
 
             <div>
-              <label className="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-1">
+              <label className="block text-xs font-bold uppercase tracking-wider text-slate-700 dark:text-slate-300 mb-1">
                 Supplier
               </label>
               <select
                 value={supplierId}
                 onChange={(e) => setSupplierId(e.target.value)}
-                className="w-full px-3 py-2.5 text-sm bg-slate-50 border border-slate-300 rounded-xl focus:ring-2 focus:ring-amber-500 focus:border-amber-500"
+                className="w-full px-3 py-2.5 text-sm bg-slate-50 dark:bg-slate-950 border border-slate-300 dark:border-slate-600 rounded-xl focus:ring-2 focus:ring-amber-500 focus:border-amber-500"
               >
                 <option value="">-- Select Supplier --</option>
                 {suppliers.map(s => (
@@ -180,11 +180,11 @@ export const InventoryModal = ({ isOpen, item, suppliers = [], onSave, onClose }
             </div>
           </div>
 
-          <div className="pt-4 border-t border-slate-100 flex items-center justify-end gap-3">
+          <div className="pt-4 border-t border-slate-100 dark:border-slate-800 flex items-center justify-end gap-3">
             <button
               type="button"
               onClick={onClose}
-              className="px-4 py-2 text-sm font-medium text-slate-700 hover:bg-slate-100 rounded-xl transition-colors"
+              className="px-4 py-2 text-sm font-medium text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:bg-slate-800 rounded-xl transition-colors"
             >
               Cancel
             </button>

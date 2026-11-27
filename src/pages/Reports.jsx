@@ -138,14 +138,14 @@ export const Reports = ({ showToast }) => {
   return (
     <div className="space-y-6">
       {/* Top Header Banner */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-white p-5 rounded-2xl border border-slate-200/80 shadow-xs">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-white dark:bg-slate-900 p-5 rounded-2xl border border-slate-200/80 dark:border-slate-700/80 shadow-xs">
         <div className="flex items-center gap-3">
-          <div className="p-3 bg-amber-50 text-amber-800 rounded-2xl">
+          <div className="p-3 bg-amber-50 dark:bg-amber-900/30 text-amber-800 rounded-2xl">
             <BarChart3 className="w-6 h-6" />
           </div>
           <div>
-            <h2 className="text-xl font-extrabold text-slate-900 tracking-tight">Business Analysis & P&L Reports</h2>
-            <p className="text-xs text-slate-500 font-medium">
+            <h2 className="text-xl font-extrabold text-slate-900 dark:text-slate-100 tracking-tight">Business Analysis & P&L Reports</h2>
+            <p className="text-xs text-slate-500 dark:text-slate-400 font-medium">
               Comprehensive financial breakdown, profitability analysis, and drink sales performance.
             </p>
           </div>
@@ -153,7 +153,7 @@ export const Reports = ({ showToast }) => {
 
         <div className="flex items-center gap-2">
           {/* Timeframe switch */}
-          <div className="flex items-center gap-1 bg-slate-100 p-1 rounded-xl border border-slate-200 text-xs font-semibold">
+          <div className="flex items-center gap-1 bg-slate-100 dark:bg-slate-800 p-1 rounded-xl border border-slate-200 dark:border-slate-700 text-xs font-semibold">
             {['Today', 'This Week', 'This Month', 'All Time'].map((tf) => (
               <button
                 key={tf}
@@ -161,7 +161,7 @@ export const Reports = ({ showToast }) => {
                 className={`px-3 py-1.5 rounded-lg transition-all ${
                   timeframe === tf
                     ? 'bg-amber-800 text-white shadow-xs'
-                    : 'text-slate-600 hover:text-slate-900'
+                    : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:text-slate-100'
                 }`}
               >
                 {tf}
@@ -171,7 +171,7 @@ export const Reports = ({ showToast }) => {
 
           <button
             onClick={handlePrint}
-            className="p-2.5 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-xl text-xs font-bold transition-colors"
+            className="p-2.5 bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-300 rounded-xl text-xs font-bold transition-colors"
             title="Print Report Summary"
           >
             <Printer className="w-4 h-4" />
@@ -218,14 +218,14 @@ export const Reports = ({ showToast }) => {
       {/* Cash vs Bank Detailed Breakdown */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         {/* Sales Channels */}
-        <div className="bg-white p-5 rounded-2xl border border-slate-200/80 shadow-xs space-y-4">
-          <h3 className="text-base font-bold text-slate-900 flex items-center gap-2">
+        <div className="bg-white dark:bg-slate-900 p-5 rounded-2xl border border-slate-200/80 dark:border-slate-700/80 shadow-xs space-y-4">
+          <h3 className="text-base font-bold text-slate-900 dark:text-slate-100 flex items-center gap-2">
             <Wallet className="w-5 h-5 text-teal-700" />
             Sales Receipts Payment Channels
           </h3>
 
           <div className="grid grid-cols-2 gap-4 pt-2">
-            <div className="p-4 rounded-xl bg-teal-50/70 border border-teal-200">
+            <div className="p-4 rounded-xl bg-teal-50/70 dark:bg-teal-900/30/70 border border-teal-200 dark:border-teal-700/50">
               <span className="text-xs font-bold text-teal-900 block">Cash Register Collections</span>
               <span className="text-xl font-extrabold text-teal-950 mt-1 block">{formatCurrency(cashSales)}</span>
               <span className="text-xs text-teal-700 font-medium mt-0.5 block">
@@ -244,25 +244,25 @@ export const Reports = ({ showToast }) => {
         </div>
 
         {/* Expense Channels */}
-        <div className="bg-white p-5 rounded-2xl border border-slate-200/80 shadow-xs space-y-4">
-          <h3 className="text-base font-bold text-slate-900 flex items-center gap-2">
+        <div className="bg-white dark:bg-slate-900 p-5 rounded-2xl border border-slate-200/80 dark:border-slate-700/80 shadow-xs space-y-4">
+          <h3 className="text-base font-bold text-slate-900 dark:text-slate-100 flex items-center gap-2">
             <Receipt className="w-5 h-5 text-rose-700" />
             Expense Payment Outflows
           </h3>
 
           <div className="grid grid-cols-2 gap-4 pt-2">
-            <div className="p-4 rounded-xl bg-rose-50/70 border border-rose-200">
-              <span className="text-xs font-bold text-rose-900 block">Cash Register Expenses</span>
+            <div className="p-4 rounded-xl bg-rose-50/70 dark:bg-rose-900/30/70 border border-rose-200 dark:border-rose-700/50">
+              <span className="text-xs font-bold text-rose-900 dark:text-rose-200 block">Cash Register Expenses</span>
               <span className="text-xl font-extrabold text-rose-950 mt-1 block">{formatCurrency(cashExpenses)}</span>
               <span className="text-xs text-rose-700 font-medium mt-0.5 block">
                 {totalExpenses > 0 ? ((cashExpenses / totalExpenses) * 100).toFixed(1) : 0}% of Expenses
               </span>
             </div>
 
-            <div className="p-4 rounded-xl bg-slate-100 border border-slate-200">
-              <span className="text-xs font-bold text-slate-800 block">Bank Account Expenses</span>
-              <span className="text-xl font-extrabold text-slate-900 mt-1 block">{formatCurrency(bankExpenses)}</span>
-              <span className="text-xs text-slate-600 font-medium mt-0.5 block">
+            <div className="p-4 rounded-xl bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700">
+              <span className="text-xs font-bold text-slate-800 dark:text-slate-200 block">Bank Account Expenses</span>
+              <span className="text-xl font-extrabold text-slate-900 dark:text-slate-100 mt-1 block">{formatCurrency(bankExpenses)}</span>
+              <span className="text-xs text-slate-600 dark:text-slate-400 font-medium mt-0.5 block">
                 {totalExpenses > 0 ? ((bankExpenses / totalExpenses) * 100).toFixed(1) : 0}% of Expenses
               </span>
             </div>
@@ -273,18 +273,18 @@ export const Reports = ({ showToast }) => {
       {/* Drink Performance & Expense Breakdown Tables */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         {/* Drink Sales Performance Table */}
-        <div className="bg-white rounded-2xl border border-slate-200/80 shadow-xs overflow-hidden">
-          <div className="p-4 sm:p-5 border-b border-slate-100">
-            <h3 className="text-base font-bold text-slate-900 flex items-center gap-2">
+        <div className="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200/80 dark:border-slate-700/80 shadow-xs overflow-hidden">
+          <div className="p-4 sm:p-5 border-b border-slate-100 dark:border-slate-800">
+            <h3 className="text-base font-bold text-slate-900 dark:text-slate-100 flex items-center gap-2">
               <Coffee className="w-5 h-5 text-amber-800" />
               Drink Sales Volume & Revenue Ranking
             </h3>
-            <p className="text-xs text-slate-500">Ranked by total calculated revenue ({timeframe})</p>
+            <p className="text-xs text-slate-500 dark:text-slate-400">Ranked by total calculated revenue ({timeframe})</p>
           </div>
 
           <div className="overflow-x-auto">
             <table className="w-full text-left text-sm">
-              <thead className="bg-slate-50 text-slate-600 font-semibold border-b border-slate-100 text-xs uppercase">
+              <thead className="bg-slate-50 dark:bg-slate-950 text-slate-600 dark:text-slate-400 font-semibold border-b border-slate-100 dark:border-slate-800 text-xs uppercase">
                 <tr>
                   <th className="py-3 px-5">Drink Item</th>
                   <th className="py-3 px-5 text-center">Cups Sold</th>
@@ -293,14 +293,14 @@ export const Reports = ({ showToast }) => {
               </thead>
               <tbody className="divide-y divide-slate-100">
                 {drinkRankingList.map((drink, idx) => (
-                  <tr key={drink.name} className="hover:bg-slate-50">
-                    <td className="py-3.5 px-5 font-bold text-slate-900 flex items-center gap-2">
-                      <span className="w-5 h-5 rounded-full bg-amber-100 text-amber-900 font-extrabold text-[10px] flex items-center justify-center">
+                  <tr key={drink.name} className="hover:bg-slate-50 dark:bg-slate-950">
+                    <td className="py-3.5 px-5 font-bold text-slate-900 dark:text-slate-100 flex items-center gap-2">
+                      <span className="w-5 h-5 rounded-full bg-amber-100 dark:bg-amber-900/40 text-amber-900 dark:text-amber-200 font-extrabold text-[10px] flex items-center justify-center">
                         {idx + 1}
                       </span>
                       {drink.name}
                     </td>
-                    <td className="py-3.5 px-5 text-center font-bold text-amber-900">
+                    <td className="py-3.5 px-5 text-center font-bold text-amber-900 dark:text-amber-200">
                       {formatNumber(drink.quantity)}
                     </td>
                     <td className="py-3.5 px-5 text-right font-extrabold text-amber-950">
@@ -314,23 +314,23 @@ export const Reports = ({ showToast }) => {
         </div>
 
         {/* Expense Category Breakdown */}
-        <div className="bg-white rounded-2xl border border-slate-200/80 shadow-xs overflow-hidden">
-          <div className="p-4 sm:p-5 border-b border-slate-100">
-            <h3 className="text-base font-bold text-slate-900 flex items-center gap-2">
+        <div className="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200/80 dark:border-slate-700/80 shadow-xs overflow-hidden">
+          <div className="p-4 sm:p-5 border-b border-slate-100 dark:border-slate-800">
+            <h3 className="text-base font-bold text-slate-900 dark:text-slate-100 flex items-center gap-2">
               <Receipt className="w-5 h-5 text-rose-700" />
               Operating Expense Category Breakdown
             </h3>
-            <p className="text-xs text-slate-500">Distribution of expenditures by operational category</p>
+            <p className="text-xs text-slate-500 dark:text-slate-400">Distribution of expenditures by operational category</p>
           </div>
 
           <div className="p-4 sm:p-5 space-y-4">
             {expenseCategoryList.map((cat) => (
               <div key={cat.category} className="space-y-1">
                 <div className="flex items-center justify-between text-xs font-bold">
-                  <span className="text-slate-800">{cat.category}</span>
+                  <span className="text-slate-800 dark:text-slate-200">{cat.category}</span>
                   <span className="text-rose-800 font-extrabold">{formatCurrency(cat.amount)} ({cat.percentage}%)</span>
                 </div>
-                <div className="w-full h-2.5 bg-slate-100 rounded-full overflow-hidden">
+                <div className="w-full h-2.5 bg-slate-100 dark:bg-slate-800 rounded-full overflow-hidden">
                   <div
                     className="h-full bg-rose-600 rounded-full transition-all duration-500"
                     style={{ width: `${cat.percentage}%` }}
@@ -343,28 +343,28 @@ export const Reports = ({ showToast }) => {
       </div>
 
       {/* Reconciliation Audit Audit Report */}
-      <div className="bg-white p-5 rounded-2xl border border-slate-200/80 shadow-xs flex flex-col sm:flex-row items-center justify-between gap-4">
+      <div className="bg-white dark:bg-slate-900 p-5 rounded-2xl border border-slate-200/80 dark:border-slate-700/80 shadow-xs flex flex-col sm:flex-row items-center justify-between gap-4">
         <div className="flex items-center gap-3">
-          <div className="p-3 bg-emerald-50 text-emerald-700 rounded-2xl">
+          <div className="p-3 bg-emerald-50 dark:bg-emerald-900/30 text-emerald-700 rounded-2xl">
             <CheckCircle2 className="w-6 h-6" />
           </div>
           <div>
-            <h3 className="text-base font-bold text-slate-900">Register Reconciliation Audit Health</h3>
-            <p className="text-xs text-slate-500">
+            <h3 className="text-base font-bold text-slate-900 dark:text-slate-100">Register Reconciliation Audit Health</h3>
+            <p className="text-xs text-slate-500 dark:text-slate-400">
               Audit score of end-of-day register cash & bank submissions.
             </p>
           </div>
         </div>
 
         <div className="flex items-center gap-4 text-center">
-          <div className="px-4 py-2 bg-emerald-50 border border-emerald-200 rounded-xl">
+          <div className="px-4 py-2 bg-emerald-50 dark:bg-emerald-900/30 border border-emerald-200 dark:border-emerald-700/50 rounded-xl">
             <span className="text-xs font-bold text-emerald-800 block">Matched Days</span>
-            <span className="text-lg font-extrabold text-emerald-900">{matchedDaysCount} Days</span>
+            <span className="text-lg font-extrabold text-emerald-900 dark:text-emerald-200">{matchedDaysCount} Days</span>
           </div>
 
-          <div className="px-4 py-2 bg-rose-50 border border-rose-200 rounded-xl">
+          <div className="px-4 py-2 bg-rose-50 dark:bg-rose-900/30 border border-rose-200 dark:border-rose-700/50 rounded-xl">
             <span className="text-xs font-bold text-rose-800 block">Discrepancy Days</span>
-            <span className="text-lg font-extrabold text-rose-900">{mismatchDaysCount} Days</span>
+            <span className="text-lg font-extrabold text-rose-900 dark:text-rose-200">{mismatchDaysCount} Days</span>
           </div>
         </div>
       </div>
